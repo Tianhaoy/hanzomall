@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div class="site-footer" th:fragment="footer-fragment">
+    <div class="footer-related">
+        <div class="footer-article w1100">
+            <dl class="contact clearfix">
+                <dt class="fl">
+                    <i class="iconfont"></i>
+                </dt>
+                <dd class="fl">
+                    <p class="text">人工客服小田</p>
+                    <p class="tel">184-4391-4781</p>
+                    <a href="//shang.qq.com/wpa/qunwpa?idkey=6fed36b464bbf51b6dff2c3e698336e05ff8ccc38d1a5daaecbe200901a541e0">QQ在线咨询</a>
+                </dd>
+            </dl>
+            <dl class="col-article">
+                <dt>帮助中心</dt>
+                <dd><a  href="javascript:goodTip()">账户管理</a></dd>
+                <dd><a  href="javascript:goodTip()" >购物指南</a></dd>
+                <dd><a  href="javascript:goodTip()" >订单操作</a></dd>
+            </dl>
+            <dl class="col-article">
+                <dt>关注我们</dt>
+                <dd><a rel="nofollow" href="https://weibo.com/superthy" target="_blank">新浪微博</a></dd>
+                <dd><a  href="javascript:goodTip()" >官方微信</a></dd>
+                <dd><a  href="javascript:goodTip()" >联系我们</a></dd>
+            </dl>
+            <dl class="col-article">
+                <dt>线下门店</dt>
+                <dd><a  href="javascript:goodTip()" >HANZO TOWN</a>
+                </dd>
+                <dd><a rel="nofollow" href="javascript:goodTip()" >服务网点</a></dd>
+                <dd><a rel="nofollow" href="javascript:goodTip()" >授权体验店</a></dd>
+            </dl>
+            <dl class="col-article">
+                <dt>关于半藏</dt>
+                <dd><a rel="nofollow" href="javascript:goodTip()" >了解半藏</a>
+                </dd>
+                <dd><a rel="nofollow" href="javascript:goodTip()" >加入半藏</a>
+                </dd>
+                <dd><a rel="nofollow" href="javascript:goodTip()" >捐赠维护</a>
+                </dd>
+            </dl>
+            <dl class="wx">
+                <dt>Hanzo-mall</dt>
+                <dd>
+                    <img th:src="@{/mall/image/pay/wxpay_qrcode.png}">
+                </dd>
+                <dd class="other">
+                    <span>分公司：</span>
+                    <a href="javascript:addressTip()">北京</a>
+                    <a href="javascript:addressTip()">上海</a>
+                    <a href="javascript:addressTip()">成都</a>
+                    <a href="javascript:addressTip()">深圳</a>
+                    <a href="javascript:addressTip()">杭州</a>
+                    <a href="javascript:addressTip()">长春</a>
+                    <a href="javascript:addressTip()">洛杉矶</a>
+                </dd>
+            </dl>
+        </div>
+        <div class="footer-links w1100">
+            <p>友情链接：</p>
+            <div class="clearfix">
+                <a th:href="@{/index}">半藏商城</a>
+                <a th:href="@{/admin}">后台管理系统</a>
+                <a href="http://o2o.babehome.com/o2o/frontend/index">o2o生活服务平台</a>
+                <a href="http://o2o.babehome.com/o2o/shopadmin/shoplist">o2o商家管理</a>
+                <a href="http://o2o.babehome.com/o2o/superadmin/login">o2o管理员系统</a>
+                <a href="javascript:issuesTip()">问题反馈</a>
+                <a href="https://github.com/Tianhaoy">GitHub 地址</a>
+            </div>
+        </div>
+        <div class="footer-info w1100">
+            <div class="info-text w1100">
+                <p><a href="javascript:infoTip()" >半藏商城 &nbsp; | &nbsp;
+                     by 皓宇QAQ&nbsp;
+                    | &nbsp;</a>
+                    &nbsp;QQ交流群：951485783&nbsp;&nbsp; <a
+                            href="//shang.qq.com/wpa/qunwpa?idkey=6fed36b464bbf51b6dff2c3e698336e05ff8ccc38d1a5daaecbe200901a541e0"><img
+                            border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="SpringBoot技术交流"
+                            title="SpringBoot技术交流"></a>
+                </p>
+                <p><img src="./mall/image/beian.png" alt=""><a href="http://www.beian.gov.cn/" target="_blank">&nbsp;吉ICP备19007447号&nbsp; | &nbsp;Copyright ©Hanzo All
+                    Rights Reserved.  </a></p>
+                <p style="color: #1baeae">皓宇QAQ，爱奇艺、优酷、腾讯视频等知名网站续费会员，淘宝、天猫、京东等商城的多年忠实用户，相声表演艺术家于谦的粉丝，Java 开发工程师，o2o.babehome.com生活服务平台作者（访问链接http://o2o.babehome.com/o2o/frontend/index）以及www.babehome.com站长（现在是404），开源技术爱好者，同时在 GitHub 维护参与0个开源项目，擅长 Java 后端开发。</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/mall/js/goodtip.js}" type="text/javascript"></script>
+</html>

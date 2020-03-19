@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html xmlns:th="http://www.thymeleaf.org">
+<header th:replace="admin/header::header-fragment"></header>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <!-- 引入页面头header-fragment -->
+    <div th:replace="admin/header::header-nav"></div>
+    <!-- 引入工具栏sidebar-fragment -->
+    <div th:replace="admin/sidebar::sidebar-fragment(${path})"></div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- Main content -->
+        <div class="content">
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">首页</h3>
+                </div> <!-- /.card-body -->
+                <div class="card-body">
+                    <div class="panel panel-default">
+                        <div style="padding: 10px 0 20px 10px;">
+                            <a href="https://github.com/Tianhaoy" target="_blank">
+                                <img th:src="@{/admin/dist/img/newbee-logo.png}" style="width: 480px;height: 240px;">
+                                <p>Hanzo-mall 项目是一套电商系统，包括 Hanzo-mall 商城系统及 Hanzo-mall-admin 商城后台管理系统，基于 Spring Boot
+                                    2.X
+                                    及相关技术栈开发。
+                                    前台商城系统包含首页门户、商品分类、新品上线、首页轮播、商品推荐、商品搜索、商品展示、购物车、订单结算、订单流程、个人订单管理、会员中心、帮助中心等模块。
+                                    后台管理系统包含数据面板、轮播图管理、商品管理、订单管理、会员管理、分类管理、设置等模块。</p>
+                                <ul>
+                                    <li>技术栈：Spring Boot 整合 Thymeleaf 模板引擎</li>
+                                    <li>Spring Boot 整合 MyBatis 操作数据库</li>
+                                    <li>Spring Boot 整合 kaptcha 验证码</li>
+                                    <li>Spring Boot 整合 logback 打印日志</li>
+                                    <li>HTML5 搭载 JqGrid 分页插件</li>
+                                    <li>ModelAndView 分页</li>
+                                    <li>KindEditor 富文本编译器</li>
+                                    <li>开发工具：IDEA JDK：1.8 数据库：MySQL8.0 项目管理：Maven</li>
+                                </ul>
+                            </a>
+                            <br>
+                            <br>
+                            <br>
+                            <h3>联系作者</h3>
+                            <ul>
+                                <li>我的邮箱：2469653218@qq.com</li>
+                                <li>QQ技术交流群：951485783 <a target="_blank"
+                                                         href="//shang.qq.com/wpa/qunwpa?idkey=6fed36b464bbf51b6dff2c3e698336e05ff8ccc38d1a5daaecbe200901a541e0"><img
+                                        border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="SpringBoot技术交流"
+                                        title="SpringBoot技术交流"></a>
+                                </li>
+                                <li>
+                                Github:&nbsp;
+                                    <iframe src="https://ghbtns.com/github-btn.html?user=Tianhaoy&repo=&type=star&count=true" frameborder="0" scrolling="0" width="50px" height="20px"></iframe>
+                                </li>
+                            </ul>
+                            <!--<div id="social-buttons" class="hidden-print">
+                                <div class="container">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <iframe class="github-btn"
+                                                    src="https://ghbtns.com/github-btn.html?user=Tianhaoy&repo=&type=watch&count=true"
+                                                    allowtransparency="true" frameborder="0" scrolling="0" width="100px" height="20px"></iframe>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>-->
+                            <!--<p></p>
+                            <ul>
+                                <li><a href="" target="_blank">Hanzo-mall in GitHub</a></li>
+                                <li><a href="" target="_blank">Hanzo-mall in Gitee</a></li>
+                            </ul>-->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <!-- 引入页脚footer-fragment -->
+    <div th:replace="admin/footer::footer-fragment"></div>
+</div>
+<!-- jQuery -->
+<script th:src="@{/admin/plugins/jquery/jquery.min.js}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script th:src="@{/admin/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- AdminLTE App -->
+<script th:src="@{/admin/dist/js/adminlte.min.js}"></script>
+</body>
+</html>
