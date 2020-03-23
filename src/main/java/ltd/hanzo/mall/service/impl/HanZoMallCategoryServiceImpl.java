@@ -1,6 +1,10 @@
 package ltd.hanzo.mall.service.impl;
 
 
+import cn.hutool.core.util.ArrayUtil;
+import com.alibaba.fastjson.JSON;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
 import ltd.hanzo.mall.common.ServiceResultEnum;
@@ -11,9 +15,11 @@ import ltd.hanzo.mall.controller.vo.ThirdLevelCategoryVO;
 import ltd.hanzo.mall.dao.GoodsCategoryMapper;
 import ltd.hanzo.mall.entity.GoodsCategory;
 import ltd.hanzo.mall.service.HanZoMallCategoryService;
+import ltd.hanzo.mall.service.RedisService;
 import ltd.hanzo.mall.util.BeanUtil;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.PageResult;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -24,10 +30,14 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.groupingBy;
 
 @Service
+@Slf4j
 public class HanZoMallCategoryServiceImpl implements HanZoMallCategoryService {
 
     @Resource
     private GoodsCategoryMapper goodsCategoryMapper;
+    @Resource
+    private RedisService redisService;
+
 
     @Override
     public PageResult getCategorisPage(PageQueryUtil pageUtil) {
@@ -84,6 +94,19 @@ public class HanZoMallCategoryServiceImpl implements HanZoMallCategoryService {
     @Override
     public List<HanZoMallIndexCategoryVO> getCategoriesForIndex() {
         List<HanZoMallIndexCategoryVO> hanZoMallIndexCategoryVOS = new ArrayList<>();
+        String key = "redis:list:indexCategory";
+        boolean exists =redisService.hasKey(key);
+        if (exists){
+            //redis中存在key 不需要从数据库中读取
+            log.debug("redis中存在key:"+key);
+            String indexCategory =redisService.get(key).toString();
+            List<HanZoMallIndexCategoryVO> categories = new ArrayList<>();
+            if(indexCategory!=null){
+                log.debug("从redis中读取商品分类--");
+                categories = JSON.parseArray(indexCategory,HanZoMallIndexCategoryVO.class);
+            }
+            return categories;
+        }
         //获取一级分类的固定数量的数据
         List<GoodsCategory> firstLevelCategories = goodsCategoryMapper.selectByLevelAndParentIdsAndNumber(Collections.singletonList(0L), HanZoMallCategoryLevelEnum.LEVEL_ONE.getLevel(), Constants.INDEX_CATEGORY_NUMBER);
         if (!CollectionUtils.isEmpty(firstLevelCategories)) {
@@ -128,6 +151,10 @@ public class HanZoMallCategoryServiceImpl implements HanZoMallCategoryService {
                     }
                 }
             }
+            log.info("更新一遍redis缓存");
+            String indexCategory = JSON.toJSONString(hanZoMallIndexCategoryVOS);
+            redisService.set(key,indexCategory);
+            redisService.expire(key,86400);
             return hanZoMallIndexCategoryVOS;
         } else {
             return null;

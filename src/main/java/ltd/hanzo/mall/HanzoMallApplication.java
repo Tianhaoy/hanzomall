@@ -3,6 +3,8 @@ package ltd.hanzo.mall;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+
 /**
  * @author 皓宇QAQ
  * @qq交流群 951485783
