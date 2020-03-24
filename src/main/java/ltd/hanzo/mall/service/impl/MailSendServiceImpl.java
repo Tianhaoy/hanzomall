@@ -58,6 +58,10 @@ public class MailSendServiceImpl implements MailSendService {
             log.info("邮件接收人"+to+"主题"+subject+"内容"+content+"邮件发送成功");
         }catch (Exception e){
             log.error("邮件接收人"+to+"主题"+subject+"内容"+content+"邮件发送出现异常");
+            log.error("异常信息为"+e.getMessage());
+            log.error("异常堆栈信息为-->");
+            e.printStackTrace();
+
         }
     }
 
