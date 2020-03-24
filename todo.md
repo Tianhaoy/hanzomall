@@ -10,13 +10,16 @@
 - 新增用户修改密码功能需要验证邮箱 才允许修改密码
 - 新增手机验证码直接登录功能点
 - 找回密码验证邮箱（发邮箱免费 发短信收费）
-- 添加redis 缓存技术 
+- 添加redis 缓存技术 主页显示内容存储到Redis中 过期时间为1天
+- 添加quartz定时任务 扫描未支付订单 发送邮件提醒
 
 ## 2020年3月待办事项
-- 添加redis 缓存技术 
+- 微服务Dubbo Springcloud
 - 添加spring Security.. Shiro的认证鉴权服务
-- 注册中心 zookeeper  
+- 注册中心 zookeeper
 - 消息队列ActiveMQ、RabbitMQ、kafka
+- API文档swagger
+- 聊天WebSocket
 - 新增智能人工对话客服功能 
 - 新增消息联系功能 用户可以和管理员进行在消息框进行实时对话 
 - 后台管理系统也需要增加一个对话列表 显示那些用户与管理员进行聊天 显示聊天记录 并可以实时回复
@@ -30,5 +33,5 @@
     >https://github.com/ityouknow/spring-boot-examples
 - 学习Spring Cloud 
     >http://www.springcloud.wiki
-- 微服务Dubbo Springcloud
+
 
