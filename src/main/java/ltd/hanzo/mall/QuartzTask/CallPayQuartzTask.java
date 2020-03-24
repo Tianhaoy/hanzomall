@@ -12,6 +12,7 @@ import ltd.hanzo.mall.service.MailSendService;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.text.DateFormat;
@@ -48,7 +49,7 @@ public class CallPayQuartzTask extends QuartzJobBean{
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日HH分mm秒");
                 String date = sdf.format(createDate);
                 HanZoMallUserVO hanZoMallUserVO = hanZoMallUserService.getByPrimaryKey(userId);
-                if (hanZoMallUserVO!=null && hanZoMallUserVO.getEmailAddress()!=null){
+                if (hanZoMallUserVO!=null && !StringUtils.isEmpty(hanZoMallUserVO.getEmailAddress())){
                     //用户邮箱不为空 拼接主题、内容给用户发送邮件
                     String subject = "【半藏商城未支付订单提醒】";
                     String content = "您好，你在"+date+"创建的订单号为"+orderNo+"的订单还尚未支付，待支付金额为"+totalPrice+"元,请尽快支付。";
