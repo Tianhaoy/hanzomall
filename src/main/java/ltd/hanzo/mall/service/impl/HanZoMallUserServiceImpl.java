@@ -149,5 +149,15 @@ public class HanZoMallUserServiceImpl implements HanZoMallUserService {
         return ServiceResultEnum.LOGIN_ERROR.getResult();
     }
 
+    @Override
+    public HanZoMallUserVO getByPrimaryKey(Long userId) {
+        MallUser user = mallUserMapper.selectByPrimaryKey(userId);
+        if (user != null) {
+            HanZoMallUserVO hanZoMallUserVO = new HanZoMallUserVO();
+            BeanUtil.copyProperties(user, hanZoMallUserVO);
+            return hanZoMallUserVO;
+        }
+        return null;
+    }
 
 }

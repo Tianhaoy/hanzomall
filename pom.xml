@@ -148,6 +148,12 @@
             <artifactId>hutool-all</artifactId>
             <version>4.6.3</version>
         </dependency>
+        <!--quartz 定时任务工具-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+            <version>2.1.13.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>

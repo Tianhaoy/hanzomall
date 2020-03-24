@@ -5,6 +5,7 @@ import ltd.hanzo.mall.controller.vo.HanZoMallOrderItemVO;
 import ltd.hanzo.mall.controller.vo.HanZoMallShoppingCartItemVO;
 import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
 import ltd.hanzo.mall.entity.HanZoMallOrder;
+import ltd.hanzo.mall.entity.MallUser;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.PageResult;
 
@@ -122,4 +123,13 @@ public interface HanZoMallOrderService {
      * @return
      */
     List<HanZoMallOrder> getHanZoMallFinishOrderByUserId(String userId);
+
+    /**
+     * 通过订单状态获取订单详情
+     *
+     * @param orderStatus
+     * @return
+     */
+    List<HanZoMallOrder> getHanZoMallOrderByOrderStatus(int orderStatus);
+
 }

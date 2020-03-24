@@ -36,4 +36,6 @@ public interface HanZoMallOrderMapper {
     List<HanZoMallOrder> selectByUserId(String userId);
 
     List<HanZoMallOrder> selectFinishOrdersByUserId(String userId);
+
+    List<HanZoMallOrder> selectOrdersByOrderStatus(int orderStatus);
 }

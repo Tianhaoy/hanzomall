@@ -416,5 +416,18 @@ public class HanZoMallOrderServiceImpl implements HanZoMallOrderService {
         return null;
     }
 
+    @Override
+    public List<HanZoMallOrder> getHanZoMallOrderByOrderStatus(int orderStatus) {
+        List<HanZoMallOrder> hanZoMallOrders = hanZoMallOrderMapper.selectOrdersByOrderStatus(orderStatus);
+        if (hanZoMallOrders != null){
+            //获取订单数据
+            //数据转换 将实体类转成vo
+            List<HanZoMallOrder> orderListS = new ArrayList<>();
+            orderListS = BeanUtil.copyList(hanZoMallOrders, HanZoMallOrder.class);
+            return orderListS;
+        }
+        return null;
+    }
+
 
 }

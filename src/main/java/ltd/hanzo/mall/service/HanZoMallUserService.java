@@ -74,4 +74,12 @@ public interface HanZoMallUserService {
      * @return
      */
     String loginByLoginName(String loginName, HttpSession httpSession);
+
+
+    /**
+     * 通过主键查信息
+     * @param userId
+     * @return
+     */
+    HanZoMallUserVO getByPrimaryKey(Long userId);
 }

@@ -53,8 +53,12 @@ public class MailSendServiceImpl implements MailSendService {
         //邮件内容
         message.setText(content);
         //发送邮件
-        mailSender.send(message);
-        log.info("邮件已经发送。");
+        try {
+            mailSender.send(message);
+            log.info("邮件接收人"+to+"主题"+subject+"内容"+content+"邮件发送成功");
+        }catch (Exception e){
+            log.error("邮件接收人"+to+"主题"+subject+"内容"+content+"邮件发送出现异常");
+        }
     }
 
     /**
