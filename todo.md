@@ -14,19 +14,18 @@
 - 添加quartz定时任务 扫描未支付订单 发送邮件提醒
 
 ## 2020年3月待办事项
+- 增加定时秒杀某个商品的功能 支持高并发
+- 增加优惠券领取页面 以及优惠券统计 支付时查询计算等功能
 - 微服务Dubbo Springcloud
-- 添加spring Security.. Shiro的认证鉴权服务
+- spring Security.. Shiro的认证鉴权服务
 - 注册中心 zookeeper
-- 消息队列ActiveMQ、RabbitMQ、kafka
+- 消息队列RocketMQ、kafka、ActiveMQ、RabbitMQ
 - API文档swagger
 - 聊天WebSocket
-- 新增智能人工对话客服功能 
+- 新增客服功能 
 - 新增消息联系功能 用户可以和管理员进行在消息框进行实时对话 
 - 后台管理系统也需要增加一个对话列表 显示那些用户与管理员进行聊天 显示聊天记录 并可以实时回复
-- 在购物车左面 增加一个消息通知 监控订单流程变化 提醒给用户 或者是 系统发送提醒给用户
-- 增加定时秒杀某个商品的功能 支持高并发 
-- 增加优惠券领取页面 以及优惠券统计 支付时查询计算等功能
-- 新增一个侧边栏页面 参考小米商城的侧边栏
+- 增加一个消息通知 监控订单流程变化 提醒给用户
 - 深度学习Spring Boot 
     >http://www.springboot.wiki
 - Spring Boot 的各种小demo 

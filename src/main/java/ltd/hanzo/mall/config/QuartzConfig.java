@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description: quartz定时任务配置
  * @Author by 皓宇QAQ
  * @Date 2020/3/23 19:51
+ * 我的理解 @Configuration是随容器启动开始加载的,始终存在的单例模式。 @Component是使用一次即实例化一次
  */
 @Configuration
 public class QuartzConfig {
