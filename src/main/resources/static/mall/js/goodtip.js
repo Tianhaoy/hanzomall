@@ -4,10 +4,9 @@ function goodTip(){
     });
 }
 function infoTip(){
-    swal("皓宇QAQ，一名垃圾Java 开发工程师，o2o.babehome.com生活服务平台作者" +
-            "以及www.babehome.com站长（现在是404），" +
-            "开源技术爱好者，同时在 GitHub 维护参与0个开源项目，" +
-            "擅长 Java 后端开发。", {
+    swal("皓宇QAQ，一名Java 开发工程师，" +
+            "开源技术爱好者，目前在GitHub上维护1个开源项目，" +
+            "擅长 Java 后端开发。2020年应届生。", {
         icon: "success",
     });
 }
@@ -17,7 +16,7 @@ function issuesTip(){
     });
 }
 function addressTip(){
-    swal("没有分公司，装牌面用的。", {
+    swal("逐渐开放，敬请期待。。。", {
         icon: "info",
     });
 }

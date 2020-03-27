@@ -4,7 +4,7 @@ package ltd.hanzo.mall.common;
  * @author 皓宇QAQ
  * @qq交流群 951485783
  * @email 2469653218@qq.com
- * @link https://github.com/Tianhaoy
+ * @link https://github.com/Tianhaoy/hanzomall
  * @apiNote 订单状态:0.待支付 1.已支付 2.配货完成 3:出库成功 4.交易成功 -1.手动关闭 -2.超时关闭 -3.商家关闭
  */
 public enum HanZoMallOrderStatusEnum {

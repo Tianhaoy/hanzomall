@@ -24,29 +24,38 @@
                 <div class="card-body">
                     <div class="panel panel-default">
                         <div style="padding: 10px 0 20px 10px;">
-                            <a href="https://github.com/Tianhaoy" target="_blank">
+                            <a href="https://github.com/Tianhaoy/hanzomall" target="_blank">
                                 <img th:src="@{/admin/dist/img/newbee-logo.png}" style="width: 480px;height: 240px;">
-                                <p>Hanzo-mall 项目是一套电商系统，包括 Hanzo-mall 商城系统及 Hanzo-mall-admin 商城后台管理系统，基于 Spring Boot
-                                    2.X
-                                    及相关技术栈开发。
-                                    前台商城系统包含首页门户、商品分类、新品上线、首页轮播、商品推荐、商品搜索、商品展示、购物车、订单结算、订单流程、个人订单管理、会员中心、帮助中心等模块。
-                                    后台管理系统包含数据面板、轮播图管理、商品管理、订单管理、会员管理、分类管理、设置等模块。</p>
+                                <p>Hanzo-mall 是一个Maven的电商系统，包括商城系统及商城后台管理系统，基于Spring Boot 2.1.0及相关
+                                    技术栈开发。Spring Boot 整合MyBatis 操作数据库，Redis缓存主页信息，Quartz定时扫描订单发送提醒邮
+                                    件，Thymeleaf 模板引擎，kaptcha 验证码，支付宝沙箱支付接口，阿里云的短信服务发送短信验证码，通过mail发送
+                                    邮件提醒和验证码，使用poi 导出Execl表格，logback 打印日志，HTML5 搭载 JqGrid 分页插件，KindEditor 富文本编
+                                    译器，阿里云OSS对象存储图片等主要功能。前台商城系统包含首页、手机免密登录，商品分类、新品上线、首页轮
+                                    播、商品推荐、商品搜索、商品展示、购物车、订单结算、订单流程、个人订单管理、订单管理、会员中心等模块。后台
+                                    管理系统包含数据面板、轮播图管理、商品管理、订单管理、会员管理、分类管理、设置等模块。整个商城的首页轮播图
+                                    等配置信息都缓存到redis中，每天定时扫描未支付订单，给用户发送邮件提醒。</p>
                                 <ul>
-                                    <li>技术栈：Spring Boot 整合 Thymeleaf 模板引擎</li>
                                     <li>Spring Boot 整合 MyBatis 操作数据库</li>
+                                    <li>Spring Boot 整合 Redis缓存主页信息</li>
+                                    <li>Spring Boot 整合 Quartz定时扫描订单发送提醒邮件</li>
+                                    <li>Spring Boot 整合 Thymeleaf 模板引擎</li>
+                                    <li>Spring Boot 整合 支付宝沙箱支付接口</li>
+                                    <li>Spring Boot 整合 阿里云的短信服务发送短信</li>
+                                    <li>Spring Boot 整合 mail发送邮件</li>
+                                    <li>Spring Boot 整合 poi 导出Execl表格</li>
                                     <li>Spring Boot 整合 kaptcha 验证码</li>
                                     <li>Spring Boot 整合 logback 打印日志</li>
                                     <li>HTML5 搭载 JqGrid 分页插件</li>
-                                    <li>ModelAndView 分页</li>
                                     <li>KindEditor 富文本编译器</li>
-                                    <li>开发工具：IDEA JDK：1.8 数据库：MySQL8.0 项目管理：Maven</li>
+                                    <li>前端css我是真不会，Vue.js有时间我学学</li>
+                                    <li>js的话还可以,有前端模板就可以开发后端</li>
                                 </ul>
                             </a>
                             <br>
                             <br>
                             <br>
-                            <h3>联系作者</h3>
-                            <ul>
+                            <h3>邮箱：2469653218@qq.com</h3>
+                            <!--<ul>
                                 <li>我的邮箱：2469653218@qq.com</li>
                                 <li>QQ技术交流群：951485783 <a target="_blank"
                                                          href="//shang.qq.com/wpa/qunwpa?idkey=6fed36b464bbf51b6dff2c3e698336e05ff8ccc38d1a5daaecbe200901a541e0"><img
@@ -57,7 +66,7 @@
                                 Github:&nbsp;
                                     <iframe src="https://ghbtns.com/github-btn.html?user=Tianhaoy&repo=&type=star&count=true" frameborder="0" scrolling="0" width="50px" height="20px"></iframe>
                                 </li>
-                            </ul>
+                            </ul>-->
                             <!--<div id="social-buttons" class="hidden-print">
                                 <div class="container">
                                     <ul class="list-inline">

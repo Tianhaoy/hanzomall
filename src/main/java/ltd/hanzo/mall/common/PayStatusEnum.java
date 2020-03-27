@@ -4,7 +4,7 @@ package ltd.hanzo.mall.common;
  * @author 皓宇QAQ
  * @qq交流群 951485783
  * @email 2469653218@qq.com
- * @link https://github.com/Tianhaoy
+ * @link https://github.com/Tianhaoy/hanzomall
  * @apiNote 订单状态:0.支付中 1.支付成功 -1.支付失败
  */
 public enum PayStatusEnum {

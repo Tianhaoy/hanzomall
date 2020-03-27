@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
  * @author 皓宇QAQ
  * @qq交流群 951485783
  * @email 2469653218@qq.com
- * @link https://github.com/Tianhaoy
+ * @link https://github.com/Tianhaoy/hanzomall
  */
 public class NumberUtil {
 

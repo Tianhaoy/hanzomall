@@ -54,8 +54,8 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 
 > hanzo-mall 在 GitHub 和国内的码云都创建了代码仓库，如果有人访问 GitHub 比较慢的话，建议在 Gitee 上查看该项目，两个仓库会保持同步更新。
 
-- [GitHub](https://github.com/Tianhaoy/hanzomall)
-- [Gitee](https://github.com/Tianhaoy/hanzomall)
+- [GitHub](https://github.com/Tianhaoy/hanzomall/hanzomall)
+- [Gitee](https://github.com/Tianhaoy/hanzomall/hanzomall)
 
 `半藏的名字解释`
 
