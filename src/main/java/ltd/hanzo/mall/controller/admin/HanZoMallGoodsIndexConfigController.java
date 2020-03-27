@@ -1,9 +1,12 @@
 package ltd.hanzo.mall.controller.admin;
 
+import lombok.extern.slf4j.Slf4j;
+import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.IndexConfigTypeEnum;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.entity.IndexConfig;
 import ltd.hanzo.mall.service.HanZoMallIndexConfigService;
+import ltd.hanzo.mall.service.UpdateRedisService;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.Result;
 import ltd.hanzo.mall.util.ResultGenerator;
@@ -24,10 +27,13 @@ import java.util.Objects;
  */
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class HanZoMallGoodsIndexConfigController {
 
     @Resource
     private HanZoMallIndexConfigService hanZoMallIndexConfigService;
+    @Resource
+    UpdateRedisService updateRedisService;
 
     @GetMapping("/indexConfigs")
     public String indexConfigsPage(HttpServletRequest request, @RequestParam("configType") int configType) {
@@ -88,6 +94,19 @@ public class HanZoMallGoodsIndexConfigController {
         }
         String result = hanZoMallIndexConfigService.updateIndexConfig(indexConfig);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            boolean sign =false;
+            if (IndexConfigTypeEnum.INDEX_GOODS_HOT.getType()==indexConfig.getConfigType()){
+                 sign =updateRedisService.updateIndexConfig(indexConfig.getConfigType(), Constants.INDEX_GOODS_HOT_NUMBER);
+            }else if (IndexConfigTypeEnum.INDEX_GOODS_NEW.getType()==indexConfig.getConfigType()){
+                 sign =updateRedisService.updateIndexConfig(indexConfig.getConfigType(),Constants.INDEX_GOODS_NEW_NUMBER);
+            }else if (IndexConfigTypeEnum.INDEX_GOODS_RECOMMOND.getType()==indexConfig.getConfigType()){
+                 sign =updateRedisService.updateIndexConfig(indexConfig.getConfigType(),Constants.INDEX_GOODS_RECOMMOND_NUMBER);
+            }
+            if (sign){
+                log.info("更新缓存成功");
+            }else {
+                log.error("更新分类缓存失败--不报错--不影响流程--");
+            }
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult(result);

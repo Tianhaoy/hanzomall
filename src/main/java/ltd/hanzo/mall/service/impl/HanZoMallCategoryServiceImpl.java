@@ -1,9 +1,7 @@
 package ltd.hanzo.mall.service.impl;
 
 
-import cn.hutool.core.util.ArrayUtil;
 import com.alibaba.fastjson.JSON;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
@@ -19,7 +17,6 @@ import ltd.hanzo.mall.service.RedisService;
 import ltd.hanzo.mall.util.BeanUtil;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.PageResult;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 

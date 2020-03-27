@@ -1,15 +1,27 @@
 package ltd.hanzo.mall.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
+import ltd.hanzo.mall.common.Constants;
+import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
+import ltd.hanzo.mall.controller.vo.HanZoMallIndexCategoryVO;
+import ltd.hanzo.mall.controller.vo.SecondLevelCategoryVO;
+import ltd.hanzo.mall.controller.vo.ThirdLevelCategoryVO;
+import ltd.hanzo.mall.dao.GoodsCategoryMapper;
+import ltd.hanzo.mall.entity.GoodsCategory;
 import ltd.hanzo.mall.service.RedisService;
+import ltd.hanzo.mall.util.BeanUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
 
 /**
  * redis操作实现类
@@ -197,5 +209,6 @@ public class RedisServiceImpl implements RedisService {
     public Long lRemove(String key, long count, Object value) {
         return redisTemplate.opsForList().remove(key, count, value);
     }
+
 }
 

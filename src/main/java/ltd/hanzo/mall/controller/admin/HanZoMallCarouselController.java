@@ -1,14 +1,17 @@
 package ltd.hanzo.mall.controller.admin;
 
+import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.entity.Carousel;
 import ltd.hanzo.mall.service.HanZoMallCarouselService;
+import ltd.hanzo.mall.service.UpdateRedisService;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.Result;
 import ltd.hanzo.mall.util.ResultGenerator;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import sun.rmi.runtime.Log;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -24,10 +27,13 @@ import java.util.Objects;
  */
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class HanZoMallCarouselController {
 
     @Resource
     HanZoMallCarouselService hanZoMallCarouselService;
+    @Resource
+    UpdateRedisService updateRedisService;
 
     @GetMapping("/carousels")
     public String carouselPage(HttpServletRequest request) {
@@ -60,6 +66,12 @@ public class HanZoMallCarouselController {
         }
         String result = hanZoMallCarouselService.saveCarousel(carousel);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            boolean sign =updateRedisService.updateIndexCarouselRedis();
+            if (sign){
+                log.info("更新轮播图缓存成功");
+            }else {
+                log.error("更新轮播图缓存失败--不报错--不影响流程--");
+            }
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult(result);
@@ -80,6 +92,12 @@ public class HanZoMallCarouselController {
         }
         String result = hanZoMallCarouselService.updateCarousel(carousel);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            boolean sign =updateRedisService.updateIndexCarouselRedis();
+            if (sign){
+                log.info("更新轮播图缓存成功");
+            }else {
+                log.error("更新轮播图缓存失败--不报错--不影响流程--");
+            }
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult(result);
@@ -109,6 +127,12 @@ public class HanZoMallCarouselController {
             return ResultGenerator.genFailResult("参数异常！");
         }
         if (hanZoMallCarouselService.deleteBatch(ids)) {
+            boolean sign =updateRedisService.updateIndexCarouselRedis();
+            if (sign){
+                log.info("更新轮播图缓存成功");
+            }else {
+                log.error("更新轮播图缓存失败--不报错--不影响流程--");
+            }
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult("删除失败");

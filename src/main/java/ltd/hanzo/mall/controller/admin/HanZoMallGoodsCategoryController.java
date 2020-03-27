@@ -1,9 +1,11 @@
 package ltd.hanzo.mall.controller.admin;
 
+import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.entity.GoodsCategory;
 import ltd.hanzo.mall.service.HanZoMallCategoryService;
+import ltd.hanzo.mall.service.UpdateRedisService;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.Result;
 import ltd.hanzo.mall.util.ResultGenerator;
@@ -25,10 +27,13 @@ import java.util.*;
  */
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class HanZoMallGoodsCategoryController {
 
     @Resource
     private HanZoMallCategoryService hanZoMallCategoryService;
+    @Resource
+    UpdateRedisService updateRedisService;
 
     @GetMapping("/categories")
     public String categoriesPage(HttpServletRequest request, @RequestParam("categoryLevel") Byte categoryLevel, @RequestParam("parentId") Long parentId, @RequestParam("backParentId") Long backParentId) {
@@ -103,6 +108,12 @@ public class HanZoMallGoodsCategoryController {
         }
         String result = hanZoMallCategoryService.saveCategory(goodsCategory);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            boolean sign =updateRedisService.updateIndexCategoryRedis();
+            if (sign){
+                log.info("更新缓存成功");
+            }else {
+                log.error("更新分类缓存失败--不报错--不影响流程--");
+            }
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult(result);
@@ -125,6 +136,12 @@ public class HanZoMallGoodsCategoryController {
         }
         String result = hanZoMallCategoryService.updateGoodsCategory(goodsCategory);
         if (ServiceResultEnum.SUCCESS.getResult().equals(result)) {
+            boolean sign =updateRedisService.updateIndexCategoryRedis();
+            if (sign){
+                log.info("更新缓存成功");
+            }else {
+                log.error("更新分类缓存失败--不报错--不影响流程--");
+            }
             return ResultGenerator.genSuccessResult();
         } else {
             return ResultGenerator.genFailResult(result);
