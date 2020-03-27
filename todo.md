@@ -12,13 +12,13 @@
 - 找回密码验证邮箱（发邮箱免费 发短信收费）
 - 添加redis 缓存技术 主页显示内容存储到Redis中 过期时间为1天
 - 添加quartz定时任务 扫描未支付订单 发送邮件提醒
-
+- 新增后台修改主页配置，同步更新redis
 ## 2020年3月待办事项
 - 增加定时秒杀某个商品的功能 支持高并发
 - 增加优惠券领取页面 以及优惠券统计 支付时查询计算等功能
 - 微服务Dubbo Springcloud
 - spring Security.. Shiro的认证鉴权服务
-- 注册中心 zookeeper
+-  zookeeper
 - 消息队列RocketMQ、kafka、ActiveMQ、RabbitMQ
 - API文档swagger
 - 聊天WebSocket
@@ -32,5 +32,20 @@
     >https://github.com/ityouknow/spring-boot-examples
 - 学习Spring Cloud 
     >http://www.springcloud.wiki
-
+- 使用RabbitMQ作为消息中间件
+- Spring AMQP操作消息中间件
+- Spring-Cloud-Eureka作为微服务注册中心
+- Spring-Cloud-Ribbon作为客户端负载均衡
+- Spring-Cloud-Gateway作为微服务网关
+- Spring-Cloud-Config作为微服务配置中心
+- Spring-Cloud-Bus作为服务总线
+- 使用Oauth2协议完成第三方认证
+- 使用Spring Security Oauth2和Redis完成单点登录
+- 使用JWT令牌校验用户权限
+- 基于CAP理论和柔性事务补偿TCC实现分布式事务
+- Seata完成分布式事务控制解决方案
+- 秒杀分析和技术解决方案
+- Redis集群、分布式解决方案、持久化策略、哨兵模式、击穿&雪崩解决方案
+- 电商微服务表结构设计
+- FastDFS分布式文件存储
 
