@@ -40,8 +40,8 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 
 `项目演示`
 
-- [商城首页](http://mall.babehome.com:28089/admin)
-- [商城后台管理系统](http://mall.babehome.com:28089/index)
+- [商城首页](http://mall.babehome.com:28089/index)
+- [商城后台管理系统](http://mall.babehome.com:28089/admin)
 
 `开发及部署`
 
