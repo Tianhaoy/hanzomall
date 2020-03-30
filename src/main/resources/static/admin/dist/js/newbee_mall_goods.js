@@ -76,6 +76,7 @@ function reload() {
     }).trigger("reloadGrid");
 }
 
+
 /**
  * 添加商品
  */
@@ -172,4 +173,11 @@ function putDownGoods() {
         }
     )
     ;
+}
+/*
+模糊查询商品
+ */
+function search() {
+    var goodsName = $('#goodsName').val() || '';
+    var goodsIntro = $('#goodsIntro').val() || '';
 }
