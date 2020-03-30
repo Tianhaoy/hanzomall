@@ -42,6 +42,24 @@
                     <div class="card-header">
                         <h3 class="card-title">商品管理</h3>
                     </div> <!-- /.card-body -->
+
+                    <!-- search-content -->
+                    <div class="search-content">
+                        <form class="form-inline" id="search-form">
+                            <div class="form-group">
+                                <label class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品名</label>
+                                <input type="text" class="form-control" id="goodsName">
+                            </div>
+                            <div class="form-group">
+                                <label class="m-l">&nbsp;&nbsp;&nbsp;&nbsp;商品简介</label>
+                                <input type="text" class="form-control" id="goodsIntro">&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <button type="button" class="btn btn-success m-l" onclick="search()">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-info m-l" onclick="javascrip:$('#search-form')[0].reset();">&nbsp;重置</button>
+                        </form>
+                    </div>
+                    <!-- /search-content -->
+
                     <div class="card-body">
                         <div class="grid-btn">
                             <button class="btn btn-info" onclick="addGoods()"><i
