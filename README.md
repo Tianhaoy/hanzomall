@@ -14,6 +14,7 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 - `Spring Boot 整合 支付宝沙箱支付接口 `
 - `Spring Boot 整合 阿里云的短信服务发送短信 `
 - `Spring Boot 整合 mail发送邮件 `
+- `Spring Boot 整合 OSS对象存储保存图片 `
 - `Spring Boot 整合 poi 导出Execl表格 `
 - `Spring Boot 整合 kaptcha 验证码 `
 - `Spring Boot 整合 logback 打印日志`
