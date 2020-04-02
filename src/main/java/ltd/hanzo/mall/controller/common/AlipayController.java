@@ -112,7 +112,7 @@ public class AlipayController {
                 mailSendService.sendSimpleMail(emailAddress, "【半藏商城付款成功】", "您好，订单号为"+orderNo+"的订单通过支付宝付款"+total_amount+"元！");
             }
             if (hanZoMallOrder.getOrderStatus()== HanZoMallOrderStatusEnum.OREDER_PAID.getOrderStatus()){
-                //并且同步回调时已经更改支付状态了 不做任何处理
+                //有可能异步回调比同步回调块，已经更改支付状态了 不做任何处理
                 log.info("订单同步回调时已更新支付状态为已支付");
             }else if (hanZoMallOrder.getOrderStatus()== HanZoMallOrderStatusEnum.ORDER_PRE_PAY.getOrderStatus()){
                 //支付成功 并且订单支付状态为待支付 更新状态为已支付
@@ -134,7 +134,7 @@ public class AlipayController {
             log.info("***************************************************************");
 
         }else{
-            log.error("异步回调签名验证失败");
+            log.error("同步回调签名验证失败");
         }
         return "redirect:/orders";
     }
