@@ -177,7 +177,17 @@ function putDownGoods() {
 /*
 模糊查询商品
  */
-function search() {
+function goodsSearch() {
     var goodsName = $('#goodsName').val() || '';
     var goodsIntro = $('#goodsIntro').val() || '';
+    var goodsSellStatus = $('#goodsSellStatus').val() || '';
+    var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+    $("#jqGrid").jqGrid('setGridParam', {
+        page: page,
+        postData: {
+            goodsName: goodsName,
+            goodsIntro: goodsIntro,
+            goodsSellStatus: goodsSellStatus
+        }
+    }).trigger("reloadGrid");
 }

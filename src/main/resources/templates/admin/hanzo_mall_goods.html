@@ -43,22 +43,30 @@
                         <h3 class="card-title">商品管理</h3>
                     </div> <!-- /.card-body -->
 
-                    <!-- search-content -->
+                    <!-- search-content by thy 20200402-->
                     <div class="search-content">
-                        <form class="form-inline" id="search-form">
-                            <div class="form-group">
-                                <label class="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商品名</label>
+                        <form class="form-inline" id="search-form" action="javascript:;">
+                            <div class="form-group" >
+                                <label class="">&nbsp;&nbsp;&nbsp;&nbsp;商品名</label>
                                 <input type="text" class="form-control" id="goodsName">
                             </div>
                             <div class="form-group">
                                 <label class="m-l">&nbsp;&nbsp;&nbsp;&nbsp;商品简介</label>
-                                <input type="text" class="form-control" id="goodsIntro">&nbsp;&nbsp;&nbsp;
+                                <input type="text" class="form-control" id="goodsIntro">
                             </div>
-                            <button type="button" class="btn btn-success m-l" onclick="search()">搜索</button>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <button type="button" class="btn btn-info m-l" onclick="javascrip:$('#search-form')[0].reset();">&nbsp;重置</button>
+                            <div class="form-group">
+                                <label class="m-l">&nbsp;&nbsp;上架状态&nbsp;&nbsp;</label>
+                                <select class="form-control" id="goodsSellStatus">
+                                    <option value="" selected>请选择</option>
+                                    <option value="0">上架</option>
+                                    <option value="1">下架</option>
+                                </select>
+                            </div>&nbsp;&nbsp;
+                            <button type="button" class="btn btn-success m-l" onclick="javascript:goodsSearch()">搜索</button>&nbsp;&nbsp;
+                            <button type="button" class="btn btn-info m-l" onclick="javascrip:$('#search-form')[0].reset();">重置</button>
                         </form>
                     </div>
-                    <!-- /search-content -->
+                    <!-- /search-content by thy 20200402-->
 
                     <div class="card-body">
                         <div class="grid-btn">
