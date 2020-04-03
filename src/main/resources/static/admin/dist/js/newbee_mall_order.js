@@ -382,3 +382,21 @@ function reset() {
     $("#userAddress").val('');
     $('#edit-error-msg').css("display", "none");
 }
+/*
+模糊查询订单信息
+ */
+function orderSearch() {
+    var orderNo = $('#orderNo').val() || '';
+    var orderStatus = $('#orderStatus').val() || '';
+    var startTime = $('#startTime').val() || '';
+    var endTime = $('#endTime').val() || ''
+    $("#jqGrid").jqGrid('setGridParam', {
+        page: 1,
+        postData: {
+            orderNo: orderNo,
+            orderStatus: orderStatus,
+            startTime: startTime,
+            endTime: endTime
+        }
+    }).trigger("reloadGrid");
+}
