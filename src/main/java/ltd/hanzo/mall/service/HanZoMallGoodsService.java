@@ -62,4 +62,5 @@ public interface HanZoMallGoodsService {
      * @return
      */
     PageResult searchHanZoMallGoods(PageQueryUtil pageUtil);
+
 }

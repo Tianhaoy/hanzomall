@@ -1,6 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
 
+import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
 import ltd.hanzo.mall.common.ServiceResultEnum;
@@ -30,6 +31,7 @@ import java.util.Objects;
  * @link https://github.com/Tianhaoy/hanzomall
  * 商品管理
  */
+@Slf4j
 @Controller
 @RequestMapping("/admin")
 public class HanZoMallGoodsController {
@@ -134,6 +136,7 @@ public class HanZoMallGoodsController {
         }
         PageQueryUtil pageUtil = new PageQueryUtil(params);
         return ResultGenerator.genSuccessResult(hanZoMallGoodsService.getHanZoMallGoodsPage(pageUtil));
+
     }
 
     /**

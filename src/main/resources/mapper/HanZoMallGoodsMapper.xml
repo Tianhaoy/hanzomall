@@ -67,7 +67,10 @@
         from tb_newbee_mall_goods_info
         <where>
             <if test="goodsName!=null and goodsName!=''">
-                and goods_name like CONCAT('%','#{goodsName}','%')
+                and goods_name like CONCAT('%',#{goodsName},'%')
+            </if>
+            <if test="goodsIntro!=null and goodsIntro!=''">
+                and goods_intro like CONCAT('%',#{goodsIntro},'%')
             </if>
             <if test="goodsSellStatus!=null and goodsSellStatus!=''">
                 and goods_sell_status = #{goodsSellStatus}
@@ -148,7 +151,10 @@
         select count(*) from tb_newbee_mall_goods_info
         <where>
             <if test="goodsName!=null and goodsName!=''">
-                and goods_name like CONCAT('%','#{goodsName}','%')
+                and goods_name like CONCAT('%',#{goodsName},'%')
+            </if>
+            <if test="goodsIntro!=null and goodsIntro!=''">
+                and goods_intro like CONCAT('%',#{goodsIntro},'%')
             </if>
             <if test="goodsSellStatus!=null and goodsSellStatus!=''">
                 and goods_sell_status = #{goodsSellStatus}

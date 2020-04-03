@@ -96,4 +96,5 @@ public class HanZoMallGoodsServiceImpl implements HanZoMallGoodsService {
         PageResult pageResult = new PageResult(hanZoMallSearchGoodsVOS, total, pageUtil.getLimit(), pageUtil.getPage());
         return pageResult;
     }
+
 }
