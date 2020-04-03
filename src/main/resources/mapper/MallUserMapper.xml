@@ -24,7 +24,13 @@
         from tb_newbee_mall_user
         where 1=1
         <if test="loginName!=null and loginName!=''">
-            and login_name = #{loginName}
+            and login_name like CONCAT('%',#{loginName},'%')
+        </if>
+        <if test="nickName!=null and nickName!=''">
+            and nick_name like CONCAT('%',#{nickName},'%')
+        </if>
+        <if test="lockedFlag!=null and lockedFlag!=''">
+            and locked_flag = #{lockedFlag}
         </if>
         order by create_time desc
         <if test="start!=null and limit!=null">
@@ -36,7 +42,13 @@
         select count(*) from tb_newbee_mall_user
         where 1=1
         <if test="loginName!=null and loginName!=''">
-            and login_name = #{loginName}
+            and login_name like CONCAT('%',#{loginName},'%')
+        </if>
+        <if test="nickName!=null and nickName!=''">
+            and nick_name like CONCAT('%',#{nickName},'%')
+        </if>
+        <if test="lockedFlag!=null and lockedFlag!=''">
+            and locked_flag = #{lockedFlag}
         </if>
     </select>
 

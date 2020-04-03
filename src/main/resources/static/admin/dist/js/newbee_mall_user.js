@@ -110,3 +110,20 @@ function lockUser(lockStatus) {
     )
     ;
 }
+/*
+模糊查询用户信息
+ */
+function userSearch() {
+    var nickName = $('#nickName').val() || '';
+    var loginName = $('#loginName').val() || '';
+    var lockedFlag = $('#lockedFlag').val() || '';
+    var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+    $("#jqGrid").jqGrid('setGridParam', {
+        page: page,
+        postData: {
+            nickName: nickName,
+            loginName: loginName,
+            lockedFlag: lockedFlag
+        }
+    }).trigger("reloadGrid");
+}
