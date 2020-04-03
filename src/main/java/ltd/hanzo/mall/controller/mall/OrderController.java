@@ -80,7 +80,7 @@ public class OrderController {
             HanZoMallException.fail(ServiceResultEnum.NULL_ADDRESS_ERROR.getResult());
         }
         if (CollectionUtils.isEmpty(myShoppingCartItems)) {
-            //购物车中无数据则跳转至错误页
+            //购物车中无数据则跳转至错误页 可能会出现快速双击 导致两个请求 第二个请求会抛出错误
             HanZoMallException.fail(ServiceResultEnum.SHOPPING_ITEM_ERROR.getResult());
         }
         //保存订单并返回订单号

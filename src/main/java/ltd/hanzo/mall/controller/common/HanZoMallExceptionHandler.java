@@ -42,7 +42,7 @@ public class HanZoMallExceptionHandler {
             modelAndView.addObject("url", req.getRequestURL());
             modelAndView.addObject("stackTrace", e.getStackTrace());
             modelAndView.addObject("author", "皓宇QAQ");
-            modelAndView.addObject("ltd", "新峰商城");
+            modelAndView.addObject("ltd", "半藏商城");
             modelAndView.setViewName("error/error");
             return modelAndView;
         }
