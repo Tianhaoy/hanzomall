@@ -52,7 +52,7 @@ public class SmsServiceImpl implements SmsService {
         //设置超时时间-可自行调整
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4FkKQn3SP7nnqmuL24ds", "Bd8MWzhAu2RgSsPlHxJsIRJE7GmmPN");
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
@@ -61,7 +61,7 @@ public class SmsServiceImpl implements SmsService {
         request.setSysAction("SendSms");
         request.putQueryParameter("RegionId", "cn-hangzhou");
         request.putQueryParameter("PhoneNumbers", phoneNumber);
-        request.putQueryParameter("SignName", "半藏商城");//直接去signName就会提示签名不合法 这样写就可以发送短信
+        request.putQueryParameter("SignName", "半藏商城");//直接取signName就会提示签名不合法 这样写就可以发送短信
         request.putQueryParameter("TemplateCode", templateCode);
         JSONObject object = new JSONObject();
         try {

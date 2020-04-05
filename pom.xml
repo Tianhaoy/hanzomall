@@ -61,12 +61,13 @@
             <artifactId>kaptcha</artifactId>
             <version>2.3.2</version>
         </dependency>
+        <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!--定时任务和@Slf4j注解日志的依赖-->
+        <!--@Slf4j注解日志的依赖-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -154,12 +155,12 @@
             <artifactId>spring-boot-starter-quartz</artifactId>
             <version>2.1.13.RELEASE</version>
         </dependency>
-        <!-- mybatis plus -->
-        <!--<dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.3.1</version>
-        </dependency>-->
+        <!-- shiro 认证授权 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>1.5.2</version>
+        </dependency>
     </dependencies>
 
     <build>
