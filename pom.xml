@@ -118,6 +118,7 @@
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
             <version>2.1.0</version>
         </dependency>
+        <!--  阿里 fastjson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
