@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.controller.vo.HanZoMallIndexCarouselVO;
-import ltd.hanzo.mall.controller.vo.HanZoMallIndexCategoryVO;
 import ltd.hanzo.mall.dao.CarouselMapper;
 import ltd.hanzo.mall.entity.Carousel;
 import ltd.hanzo.mall.service.HanZoMallCarouselService;
