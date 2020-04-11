@@ -54,6 +54,7 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 - 我的邮箱：`2469653218@qq.com`
 
 - [GitHub](https://github.com/Tianhaoy/hanzomall)
+- [个人博客](http://blog.babehome.com:8090/)
 
 `半藏的名字解释`
 
