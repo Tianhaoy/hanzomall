@@ -162,6 +162,12 @@
             <artifactId>shiro-spring</artifactId>
             <version>1.5.2</version>
         </dependency>
+        <!-- commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.4</version>
+        </dependency>
     </dependencies>
 
     <build>
