@@ -21,6 +21,8 @@ public class HanZoMallGoodsDetailVO implements Serializable {
 
     private Integer originalPrice;
 
+    private Integer stockNum;
+
     private String goodsDetailContent;
 
     public Long getGoodsId() {
@@ -85,5 +87,13 @@ public class HanZoMallGoodsDetailVO implements Serializable {
 
     public void setGoodsCarouselList(String[] goodsCarouselList) {
         this.goodsCarouselList = goodsCarouselList;
+    }
+
+    public Integer getStockNum() {
+        return stockNum;
+    }
+
+    public void setStockNum(Integer stockNum) {
+        this.stockNum = stockNum;
     }
 }
