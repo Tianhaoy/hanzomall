@@ -42,6 +42,7 @@
             </div>
 
             <div class="order">
+                <input class="car" type="button" th:value="'库存:'+${goodsDetail.stockNum}+'件'"/>
                 <input class="car" type="button" th:onclick="'saveAndGoCart('+${goodsDetail.goodsId}+')'" value="立即选购"/>
                 <input class="car" type="button" th:onclick="'saveToCart('+${goodsDetail.goodsId}+')'" value="加入购物车"/>
             </div>
