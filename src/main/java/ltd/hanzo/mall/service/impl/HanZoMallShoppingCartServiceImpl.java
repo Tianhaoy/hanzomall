@@ -26,14 +26,11 @@ public class HanZoMallShoppingCartServiceImpl implements HanZoMallShoppingCartSe
     @Resource
     private HanZoMallGoodsMapper hanZoMallGoodsMapper;
 
-    //todo 修改session中购物项数量
-
     @Override
     public String saveHanZoMallCartItem(HanZoMallShoppingCartItem hanZoMallShoppingCartItem) {
         HanZoMallShoppingCartItem temp = hanZoMallShoppingCartItemMapper.selectByUserIdAndGoodsId(hanZoMallShoppingCartItem.getUserId(), hanZoMallShoppingCartItem.getGoodsId());
         if (temp != null) {
-            //已存在则修改该记录
-            //todo count = tempCount + 1
+            //购物车中已存在这个物品则修改该记录
             temp.setGoodsCount(temp.getGoodsCount()+hanZoMallShoppingCartItem.getGoodsCount());
             return updateHanZoMallCartItem(temp);
         }
@@ -41,6 +38,9 @@ public class HanZoMallShoppingCartServiceImpl implements HanZoMallShoppingCartSe
         //商品为空
         if (hanZoMallGoods == null) {
             return ServiceResultEnum.GOODS_NOT_EXIST.getResult();
+        }
+        if (hanZoMallGoods.getStockNum() == 0) {
+            return ServiceResultEnum.GOODS_NUM_NULL.getResult();
         }
         int totalItem = hanZoMallShoppingCartItemMapper.selectCountByUserId(hanZoMallShoppingCartItem.getUserId()) + 1;
         //超出单个商品的最大数量
