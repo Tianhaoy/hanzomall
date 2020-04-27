@@ -20,8 +20,6 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 - `Spring Boot 整合 logback 打印日志`
 - `HTML5 搭载 JqGrid 分页插件`
 - `KindEditor 富文本编译器`
-- `前端css我是真不会，Vue.js有时间我学学`
-- `js的话还可以,有前端模板就可以开发后端`
 
 `项目开发工具`
 
