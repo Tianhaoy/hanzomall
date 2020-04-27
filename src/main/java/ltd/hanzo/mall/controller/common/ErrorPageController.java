@@ -85,4 +85,17 @@ public class ErrorPageController implements ErrorController {
         }
         return HttpStatus.INTERNAL_SERVER_ERROR;
     }
+
+    @RequestMapping(value ="error/error_5xx")
+    public String error_5xx (){
+        return "error/error_5xx";
+    }
+    @RequestMapping(value ="error/error_400")
+    public String error_400 (){
+        return "error/error_400";
+    }
+    @RequestMapping(value ="error/error_404")
+    public String error_404 (){
+        return "error/error_404";
+    }
 }
