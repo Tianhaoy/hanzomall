@@ -113,7 +113,7 @@ public class AlipayController {
             }
             if (hanZoMallOrder.getOrderStatus()== HanZoMallOrderStatusEnum.OREDER_PAID.getOrderStatus()){
                 //有可能异步回调比同步回调块，已经更改支付状态了 不做任何处理
-                log.info("订单同步回调时已更新支付状态为已支付");
+                log.info("订单异步回调时已更新支付状态为已支付");
             }else if (hanZoMallOrder.getOrderStatus()== HanZoMallOrderStatusEnum.ORDER_PRE_PAY.getOrderStatus()){
                 //支付成功 并且订单支付状态为待支付 更新状态为已支付
                 String payResult = hanZoMallOrderService.paySuccess(orderNo, Constants.ALIPAY_TYPE,user.getUserId());
