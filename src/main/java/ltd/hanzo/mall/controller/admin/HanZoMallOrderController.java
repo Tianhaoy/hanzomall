@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ltd.hanzo.mall.common.HanZoMallOrderStatusEnum;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.controller.vo.HanZoMallOrderItemVO;
@@ -26,6 +28,7 @@ import java.util.Objects;
  * @email 2469653218@qq.com
  * @link https://github.com/Tianhaoy/hanzomall
  */
+@Api(tags = "HanZoMallOrderController", description = "商品订单管理")
 @Controller
 @RequestMapping("/admin")
 public class HanZoMallOrderController {
@@ -35,6 +38,7 @@ public class HanZoMallOrderController {
     @Resource
     private HanZoMallOrderMapper hanZoMallOrderMapper;
 
+    @ApiOperation("订单页路由")
     @GetMapping("/orders")
     public String ordersPage(HttpServletRequest request) {
         request.setAttribute("path", "orders");
@@ -44,6 +48,7 @@ public class HanZoMallOrderController {
     /**
      * 列表
      */
+    @ApiOperation("获取所有订单列表")
     @RequestMapping(value = "/orders/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -57,6 +62,7 @@ public class HanZoMallOrderController {
     /**
      * 修改
      */
+    @ApiOperation("修改订单信息")
     @RequestMapping(value = "/orders/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@RequestBody HanZoMallOrder hanZoMallOrder) {
@@ -78,6 +84,7 @@ public class HanZoMallOrderController {
     /**
      * 详情
      */
+    @ApiOperation("订单详情信息")
     @GetMapping("/order-items/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
@@ -91,6 +98,7 @@ public class HanZoMallOrderController {
     /**
      * 配货
      */
+    @ApiOperation("订单配货")
     @RequestMapping(value = "/orders/checkDone", method = RequestMethod.POST)
     @ResponseBody
     public Result checkDone(@RequestBody Long[] ids) {
@@ -108,6 +116,7 @@ public class HanZoMallOrderController {
     /**
      * 出库
      */
+    @ApiOperation("订单出库")
     @RequestMapping(value = "/orders/checkOut", method = RequestMethod.POST)
     @ResponseBody
     public Result checkOut(@RequestBody Long[] ids) {
@@ -125,6 +134,7 @@ public class HanZoMallOrderController {
     /**
      * 关闭订单
      */
+    @ApiOperation("关闭订单")
     @RequestMapping(value = "/orders/close", method = RequestMethod.POST)
     @ResponseBody
     public Result closeOrder(@RequestBody Long[] ids) {
