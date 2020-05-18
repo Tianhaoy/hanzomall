@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
 import ltd.hanzo.mall.common.ServiceResultEnum;
@@ -25,6 +27,7 @@ import java.util.*;
  * @link https://github.com/Tianhaoy/hanzomall
  * 商品分类管理
  */
+@Api(tags = "HanZoMallGoodsCategoryController", description = "商品分类管理")
 @Controller
 @RequestMapping("/admin")
 @Slf4j
@@ -35,6 +38,7 @@ public class HanZoMallGoodsCategoryController {
     @Resource
     UpdateRedisService updateRedisService;
 
+    @ApiOperation("商品分类管理路由")
     @GetMapping("/categories")
     public String categoriesPage(HttpServletRequest request, @RequestParam("categoryLevel") Byte categoryLevel, @RequestParam("parentId") Long parentId, @RequestParam("backParentId") Long backParentId) {
         if (categoryLevel == null || categoryLevel < 1 || categoryLevel > 3) {
@@ -50,6 +54,7 @@ public class HanZoMallGoodsCategoryController {
     /**
      * 列表
      */
+    @ApiOperation("商品分类列表")
     @RequestMapping(value = "/categories/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -63,6 +68,7 @@ public class HanZoMallGoodsCategoryController {
     /**
      * 列表
      */
+    @ApiOperation("商品分类联动列表")
     @RequestMapping(value = "/categories/listForSelect", method = RequestMethod.GET)
     @ResponseBody
     public Result listForSelect(@RequestParam("categoryId") Long categoryId) {
@@ -97,6 +103,7 @@ public class HanZoMallGoodsCategoryController {
     /**
      * 添加
      */
+    @ApiOperation("添加商品分类")
     @RequestMapping(value = "/categories/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(@RequestBody GoodsCategory goodsCategory) {
@@ -124,6 +131,7 @@ public class HanZoMallGoodsCategoryController {
     /**
      * 修改
      */
+    @ApiOperation("修改商品分类")
     @RequestMapping(value = "/categories/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@RequestBody GoodsCategory goodsCategory) {
@@ -151,6 +159,7 @@ public class HanZoMallGoodsCategoryController {
     /**
      * 详情
      */
+    @ApiOperation("商品分类详细信息")
     @GetMapping("/categories/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
@@ -164,6 +173,7 @@ public class HanZoMallGoodsCategoryController {
     /**
      * 分类删除
      */
+    @ApiOperation("删除商品分类")
     @RequestMapping(value = "/categories/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {

@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.mall;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallOrderStatusEnum;
@@ -29,13 +31,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
+@Api(tags = "BillController", description = "我的账单")
 @Slf4j
 @Controller
 public class BillController {
     @Resource
     private HanZoMallOrderService hanZoMallOrderService;
 
+    @ApiOperation("我的账单路由")
     @GetMapping("/bill")
     public String billListPage(@RequestParam Map<String, Object> params, HttpServletRequest request, HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -53,6 +56,7 @@ public class BillController {
     }
 
     //导出订单为Excel表格
+    @ApiOperation("导出我的账单表格")
     @GetMapping("/bill/putExcel")
     public void ordersExcel(HttpServletResponse response, HttpSession httpSession){
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);

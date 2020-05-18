@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.mall;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.ServiceResultEnum;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+@Api(tags = "PersonalController", description = "个人信息")
 @Slf4j
 @Controller
 public class PersonalController {
@@ -24,6 +26,7 @@ public class PersonalController {
     @Resource
     private HanZoMallUserService hanZoMallUserService;
 
+    @ApiOperation("个人信息路由")
     @GetMapping("/personal")
     public String personalPage(HttpServletRequest request,
                                HttpSession httpSession) {
@@ -31,32 +34,32 @@ public class PersonalController {
         return "mall/personal";
     }
 
+    @ApiOperation("退出登录")
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
         httpSession.removeAttribute(Constants.MALL_USER_SESSION_KEY);
         return "mall/oss-login";
     }
 
+    @ApiOperation("账号登录路由")
     @GetMapping({"/login", "login.html"})
     public String loginPage() {
         return "mall/login";
     }
 
+    @ApiOperation("用户注册路由")
     @GetMapping({"/register", "register.html"})
     public String registerPage() {
         return "mall/register";
     }
 
-    @GetMapping("/personal/addresses")
-    public String addressesPage() {
-        return "mall/addresses";
-    }
-
+    @ApiOperation("手机登录路由")
     @GetMapping({"/oss-login", "oss-login.html"})
     public String ossLoginPage() {
         return "mall/oss-login";
     }
 
+    @ApiOperation("用户账号登录")
     @PostMapping("/login")
     @ResponseBody
     public Result login(@RequestParam("loginName") String loginName,
@@ -85,6 +88,7 @@ public class PersonalController {
         return ResultGenerator.genFailResult(loginResult);
     }
 
+    @ApiOperation("用户手机登录")
     @PostMapping("/ossLogin")
     @ResponseBody
     public Result ossLogin(@RequestParam("loginName") String loginName,
@@ -104,7 +108,7 @@ public class PersonalController {
         if (hanZoMallUserService.getByLoginName(loginName) == null) {
             //用户没有注册过 先自动帮用户注册账号 再登录
             log.info("用户没有注册过--");
-            String password = "123456";//通过手机号注册的用户密码默认为本次的验证码
+            String password = "123456";//通过手机号注册的用户密码默认为123456
             String registerResult = hanZoMallUserService.register(loginName, password);
             //注册成功
             if (ServiceResultEnum.SUCCESS.getResult().equals(registerResult)) {
@@ -134,6 +138,7 @@ public class PersonalController {
         }
     }
 
+    @ApiOperation("用户注册")
     @PostMapping("/register")
     @ResponseBody
     public Result register(@RequestParam("loginName") String loginName,
@@ -162,6 +167,7 @@ public class PersonalController {
         return ResultGenerator.genFailResult(registerResult);
     }
 
+    @ApiOperation("修改个人信息")
     @PostMapping("/personal/updateInfo")
     @ResponseBody
     public Result updateInfo(@RequestBody MallUser mallUser, HttpSession httpSession) {
@@ -175,6 +181,8 @@ public class PersonalController {
             return result;
         }
     }
+
+    @ApiOperation("修改密码")
     @PostMapping("/personal/updatePassword/{kaptchaCode}")
     @ResponseBody
     public Result updatePassword(@RequestBody MallUser mallUser, @PathVariable("kaptchaCode") String kaptchaCode,HttpSession httpSession) {

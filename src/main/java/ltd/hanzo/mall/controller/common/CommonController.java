@@ -2,6 +2,8 @@ package ltd.hanzo.mall.controller.common;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ltd.hanzo.mall.common.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +23,14 @@ import java.util.Properties;
  * @email 2469653218@qq.com
  * @link https://github.com/Tianhaoy/hanzomall
  */
+@Api(tags = "CommonController", description = "公共接口")
 @Controller
 public class CommonController {
 
     @Autowired
     private DefaultKaptcha captchaProducer;
 
+    @ApiOperation("kaptcha验证码")
     @GetMapping("/common/kaptcha")
     public void defaultKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         byte[] captchaOutputStream = null;
@@ -52,6 +56,7 @@ public class CommonController {
         responseOutputStream.close();
     }
 
+    @ApiOperation("商城kaptcha验证码")
     @GetMapping("/common/mall/kaptcha")
     public void mallKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         DefaultKaptcha hanZoMallLoginKaptcha = new DefaultKaptcha();

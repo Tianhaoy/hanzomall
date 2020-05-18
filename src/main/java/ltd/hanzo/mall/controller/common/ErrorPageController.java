@@ -1,5 +1,6 @@
 package ltd.hanzo.mall.controller.common;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-
+@Api(tags = "ErrorPageController", description = "错误页面管理")
 @Controller
 public class ErrorPageController implements ErrorController {
 

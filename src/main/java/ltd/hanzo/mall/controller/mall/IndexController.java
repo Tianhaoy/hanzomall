@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.mall;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.IndexConfigTypeEnum;
 import ltd.hanzo.mall.controller.vo.HanZoMallIndexCarouselVO;
@@ -15,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-
+@Api(tags = "IndexController", description = "用户首页")
 @Controller
 public class IndexController {
 
@@ -28,6 +30,7 @@ public class IndexController {
     @Resource
     private HanZoMallCategoryService hanZoMallCategoryService;
 
+    @ApiOperation("首页路由")
     @GetMapping({"/index", "/", "/index.html"})
     public String indexPage(HttpServletRequest request) {
         List<HanZoMallIndexCategoryVO> categories = hanZoMallCategoryService.getCategoriesForIndex();

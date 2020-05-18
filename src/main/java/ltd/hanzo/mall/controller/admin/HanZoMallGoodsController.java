@@ -1,6 +1,8 @@
 package ltd.hanzo.mall.controller.admin;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallCategoryLevelEnum;
@@ -31,6 +33,7 @@ import java.util.Objects;
  * @link https://github.com/Tianhaoy/hanzomall
  * 商品管理
  */
+@Api(tags = "HanZoMallGoodsController", description = "商品管理")
 @Slf4j
 @Controller
 @RequestMapping("/admin")
@@ -41,12 +44,14 @@ public class HanZoMallGoodsController {
     @Resource
     private HanZoMallCategoryService hanZoMallCategoryService;
 
+    @ApiOperation("商品管理路由")
     @GetMapping("/goods")
     public String goodsPage(HttpServletRequest request) {
         request.setAttribute("path", "hanzo_mall_goods");
         return "admin/hanzo_mall_goods";
     }
 
+    @ApiOperation("添加商品信息路由")
     @GetMapping("/goods/edit")
     public String edit(HttpServletRequest request) {
         request.setAttribute("path", "edit");
@@ -67,7 +72,7 @@ public class HanZoMallGoodsController {
         }
         return "error/error_5xx";
     }
-
+    @ApiOperation("修改商品信息路由")
     @GetMapping("/goods/edit/{goodsId}")
     public String edit(HttpServletRequest request, @PathVariable("goodsId") Long goodsId) {
         request.setAttribute("path", "edit");
@@ -128,6 +133,7 @@ public class HanZoMallGoodsController {
     /**
      * 列表
      */
+    @ApiOperation("商品信息列表")
     @RequestMapping(value = "/goods/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -142,6 +148,7 @@ public class HanZoMallGoodsController {
     /**
      * 添加
      */
+    @ApiOperation("添加商品信息")
     @RequestMapping(value = "/goods/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(@RequestBody HanZoMallGoods hanZoMallGoods) {
@@ -169,6 +176,7 @@ public class HanZoMallGoodsController {
     /**
      * 修改
      */
+    @ApiOperation("修改商品信息")
     @RequestMapping(value = "/goods/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@RequestBody HanZoMallGoods hanZoMallGoods) {
@@ -196,6 +204,7 @@ public class HanZoMallGoodsController {
     /**
      * 详情
      */
+    @ApiOperation("商品详细信息")
     @GetMapping("/goods/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
@@ -209,6 +218,7 @@ public class HanZoMallGoodsController {
     /**
      * 批量修改销售状态
      */
+    @ApiOperation("修改商品销售状态")
     @RequestMapping(value = "/goods/status/{sellStatus}", method = RequestMethod.PUT)
     @ResponseBody
     public Result delete(@RequestBody Long[] ids, @PathVariable("sellStatus") int sellStatus) {

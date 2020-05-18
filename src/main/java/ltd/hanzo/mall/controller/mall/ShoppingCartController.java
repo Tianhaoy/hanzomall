@@ -1,6 +1,8 @@
 package ltd.hanzo.mall.controller.mall;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.controller.vo.HanZoMallShoppingCartItemVO;
@@ -19,13 +21,14 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-
+@Api(tags = "ShoppingCartController", description = "购物车")
 @Controller
 public class ShoppingCartController {
     private final Logger log = LoggerFactory.getLogger(ShoppingCartController.class);
     @Resource
     private HanZoMallShoppingCartService hanZoMallShoppingCartService;
 
+    @ApiOperation("购物车路由")
     @GetMapping("/shop-cart")
     public String cartListPage(HttpServletRequest request,
                                HttpSession httpSession) {
@@ -53,13 +56,13 @@ public class ShoppingCartController {
         return "mall/cart";
     }
 
+    @ApiOperation("加入购物车")
     @PostMapping("/shop-cart")
     @ResponseBody
     public Result saveHanZoMallShoppingCartItem(@RequestBody HanZoMallShoppingCartItem hanZoMallShoppingCartItem,
                                                 HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         hanZoMallShoppingCartItem.setUserId(user.getUserId());
-        //todo 判断数量
         String saveResult = hanZoMallShoppingCartService.saveHanZoMallCartItem(hanZoMallShoppingCartItem);
         //添加成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(saveResult)) {
@@ -69,13 +72,13 @@ public class ShoppingCartController {
         return ResultGenerator.genFailResult(saveResult);
     }
 
+    @ApiOperation("修改购物车")
     @PutMapping("/shop-cart")
     @ResponseBody
     public Result updateHanZoMallShoppingCartItem(@RequestBody HanZoMallShoppingCartItem hanZoMallShoppingCartItem,
                                                    HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         hanZoMallShoppingCartItem.setUserId(user.getUserId());
-        //todo 判断数量
         String updateResult = hanZoMallShoppingCartService.updateHanZoMallCartItem(hanZoMallShoppingCartItem);
         //修改成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(updateResult)) {
@@ -85,6 +88,7 @@ public class ShoppingCartController {
         return ResultGenerator.genFailResult(updateResult);
     }
 
+    @ApiOperation("删除购物车")
     @DeleteMapping("/shop-cart/{hanZoMallShoppingCartItemId}")
     @ResponseBody
     public Result updateHanZoMallShoppingCartItem(@PathVariable("hanZoMallShoppingCartItemId") Long hanZoMallShoppingCartItemId,
@@ -99,6 +103,7 @@ public class ShoppingCartController {
         return ResultGenerator.genFailResult(ServiceResultEnum.OPERATE_ERROR.getResult());
     }
 
+    @ApiOperation("结算购物车")
     @GetMapping("/shop-cart/settle")
     public String settlePage(HttpServletRequest request,
                              HttpSession httpSession) {

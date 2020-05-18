@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.IndexConfigTypeEnum;
@@ -25,6 +27,7 @@ import java.util.Objects;
  * @email 2469653218@qq.com
  * @link https://github.com/Tianhaoy/hanzomall
  */
+@Api(tags = "HanZoMallGoodsIndexConfigController", description = "商品配置")
 @Controller
 @RequestMapping("/admin")
 @Slf4j
@@ -35,6 +38,7 @@ public class HanZoMallGoodsIndexConfigController {
     @Resource
     UpdateRedisService updateRedisService;
 
+    @ApiOperation("商品配置路由")
     @GetMapping("/indexConfigs")
     public String indexConfigsPage(HttpServletRequest request, @RequestParam("configType") int configType) {
         IndexConfigTypeEnum indexConfigTypeEnum = IndexConfigTypeEnum.getIndexConfigTypeEnumByType(configType);
@@ -50,6 +54,7 @@ public class HanZoMallGoodsIndexConfigController {
     /**
      * 列表
      */
+    @ApiOperation("商品配置信息列表")
     @RequestMapping(value = "/indexConfigs/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -63,6 +68,7 @@ public class HanZoMallGoodsIndexConfigController {
     /**
      * 添加
      */
+    @ApiOperation("保存商品配置信息")
     @RequestMapping(value = "/indexConfigs/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(@RequestBody IndexConfig indexConfig) {
@@ -83,6 +89,7 @@ public class HanZoMallGoodsIndexConfigController {
     /**
      * 修改
      */
+    @ApiOperation("修改商品配置信息")
     @RequestMapping(value = "/indexConfigs/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@RequestBody IndexConfig indexConfig) {
@@ -116,6 +123,7 @@ public class HanZoMallGoodsIndexConfigController {
     /**
      * 详情
      */
+    @ApiOperation("商品配置详细信息")
     @GetMapping("/indexConfigs/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Long id) {
@@ -129,6 +137,7 @@ public class HanZoMallGoodsIndexConfigController {
     /**
      * 删除
      */
+    @ApiOperation("删除商品配置信息")
     @RequestMapping(value = "/indexConfigs/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@RequestBody Long[] ids) {

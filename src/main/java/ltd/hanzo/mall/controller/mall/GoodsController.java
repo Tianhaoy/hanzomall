@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.mall;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallException;
 import ltd.hanzo.mall.common.ServiceResultEnum;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
-
+@Api(tags = "GoodsController", description = "首页商品展示")
 @Controller
 public class GoodsController {
 
@@ -28,6 +30,7 @@ public class GoodsController {
     @Resource
     private HanZoMallCategoryService hanZoMallCategoryService;
 
+    @ApiOperation("搜索商品")
     @GetMapping({"/search", "/search.html"})
     public String searchPage(@RequestParam Map<String, Object> params, HttpServletRequest request) {
         if (StringUtils.isEmpty(params.get("page"))) {
@@ -60,6 +63,7 @@ public class GoodsController {
         return "mall/search";
     }
 
+    @ApiOperation("商品详细信息")
     @GetMapping("/goods/detail/{goodsId}")
     public String detailPage(@PathVariable("goodsId") Long goodsId, HttpServletRequest request) {
         if (goodsId < 1) {

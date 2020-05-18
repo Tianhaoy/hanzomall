@@ -4,6 +4,8 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.common.HanZoMallOrderStatusEnum;
@@ -33,6 +35,7 @@ import java.util.Map;
  * @link https://github.com/Tianhaoy/hanzomall
  * @阿里支付接口
  */
+@Api(tags = "AlipayController", description = "支付宝支付")
 @Slf4j
 @Controller
 @RequestMapping("/alipay")
@@ -44,6 +47,7 @@ public class AlipayController {
     private MailSendService mailSendService;
 
     //前往支付宝沙箱网关进行支付
+    @ApiOperation("支付宝支付")
     @RequestMapping(value = "/goAlipay", produces = "text/html; charset=UTF-8")
     @ResponseBody
     public String goAlipay(@RequestParam("orderNo") String orderNo,@RequestParam("totalPrice") String totalPrice,
@@ -77,6 +81,7 @@ public class AlipayController {
     }
 
     //支付宝同步通知页面,成功返回
+    @ApiOperation("支付宝同步回调")
     @RequestMapping(value = "/alipayReturnNotice")
     public String alipayReturnNotice(HttpServletRequest request, HttpServletRequest response, HttpSession httpSession) throws Exception {
         log.info("支付成功, 进入同步通知接口...");
@@ -140,6 +145,7 @@ public class AlipayController {
     }
 
     //支付宝异步 通知页面
+    @ApiOperation("支付宝异步回调")
     @RequestMapping(value = "/alipayNotifyNotice")
     @ResponseBody
     public String alipayNotifyNotice(HttpServletRequest request, HttpServletRequest response) throws Exception {

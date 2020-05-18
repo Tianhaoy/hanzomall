@@ -3,6 +3,8 @@ package ltd.hanzo.mall.controller.common;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.PutObjectResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.util.Result;
@@ -29,11 +31,13 @@ import java.util.Random;
  * @email 2469653218@qq.com
  * @link https://github.com/Tianhaoy/hanzomall
  */
+@Api(tags = "UploadController", description = "文件上传管理")
 @Slf4j
 @Controller
 @RequestMapping("/admin")
 public class UploadController {
 
+    @ApiOperation("图片上传oss")
     @PostMapping({"/upload/file"})
     @ResponseBody
     public Result upload(HttpServletRequest httpServletRequest, @RequestParam("file") MultipartFile file) throws URISyntaxException {

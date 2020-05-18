@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.entity.AdminUser;
 import ltd.hanzo.mall.service.AdminUserService;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpSession;
  * @link https://github.com/Tianhaoy/hanzomall
  * 后台主页
  */
+@Api(tags = "AdminController", description = "后台管理")
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -25,23 +28,20 @@ public class AdminController {
     @Resource
     private AdminUserService adminUserService;
 
+    @ApiOperation("后台管理登录路由")
     @GetMapping({"/login"})
     public String login() {
         return "admin/login";
     }
 
-    @GetMapping({"/test"})
-    public String test() {
-        return "admin/test";
-    }
-
-
+    @ApiOperation("后台管理主页")
     @GetMapping({"", "/", "/index", "/index.html"})
     public String index(HttpServletRequest request) {
         request.setAttribute("path", "index");
         return "admin/index";
     }
 
+    @ApiOperation("后台管理登录")
     @PostMapping(value = "/login")
     public String login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,
@@ -73,6 +73,7 @@ public class AdminController {
         }
     }
 
+    @ApiOperation("后台管理修改密码")
     @GetMapping("/profile")
     public String profile(HttpServletRequest request) {
         Integer loginUserId = (int) request.getSession().getAttribute("loginUserId");
@@ -86,6 +87,7 @@ public class AdminController {
         return "admin/profile";
     }
 
+    @ApiOperation("后台管理修改密码")
     @PostMapping("/profile/password")
     @ResponseBody
     public String passwordUpdate(HttpServletRequest request, @RequestParam("originalPassword") String originalPassword,
@@ -105,6 +107,7 @@ public class AdminController {
         }
     }
 
+    @ApiOperation("后台管理修改用户信息")
     @PostMapping("/profile/name")
     @ResponseBody
     public String nameUpdate(HttpServletRequest request, @RequestParam("loginUserName") String loginUserName,
@@ -120,6 +123,7 @@ public class AdminController {
         }
     }
 
+    @ApiOperation("后台管理账户注销")
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {
         request.getSession().removeAttribute("loginUserId");

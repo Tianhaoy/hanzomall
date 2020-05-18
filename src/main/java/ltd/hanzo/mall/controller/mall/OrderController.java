@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.mall;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 import ltd.hanzo.mall.common.*;
@@ -33,7 +35,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
-
+@Api(tags = "OrderController", description = "用户订单")
 @Slf4j
 @Controller
 public class OrderController {
@@ -45,6 +47,7 @@ public class OrderController {
     @Resource
     private MailSendService mailSendService;
 
+    @ApiOperation("某个订单信息")
     @GetMapping("/orders/{orderNo}")
     public String orderDetailPage(HttpServletRequest request, @PathVariable("orderNo") String orderNo, HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -56,6 +59,7 @@ public class OrderController {
         return "mall/order-detail";
     }
 
+    @ApiOperation("我的订单信息")
     @GetMapping("/orders")
     public String orderListPage(@RequestParam Map<String, Object> params, HttpServletRequest request, HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -71,6 +75,7 @@ public class OrderController {
         return "mall/my-orders";
     }
 
+    @ApiOperation("提交订单")
     @GetMapping("/saveOrder")
     public String saveOrder(HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -89,6 +94,7 @@ public class OrderController {
         return "redirect:/orders/" + saveOrderResult;
     }
 
+    @ApiOperation("取消订单")
     @PutMapping("/orders/{orderNo}/cancel")
     @ResponseBody
     public Result cancelOrder(@PathVariable("orderNo") String orderNo, HttpSession httpSession) {
@@ -101,6 +107,7 @@ public class OrderController {
         }
     }
 
+    @ApiOperation("确认收货")
     @PutMapping("/orders/{orderNo}/finish")
     @ResponseBody
     public Result finishOrder(@PathVariable("orderNo") String orderNo, HttpSession httpSession) {
@@ -113,6 +120,7 @@ public class OrderController {
         }
     }
 
+    @ApiOperation("支付前验证状态")
     @GetMapping("/selectPayType")
     public String selectPayType(HttpServletRequest request, @RequestParam("orderNo") String orderNo, HttpSession httpSession) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -129,6 +137,7 @@ public class OrderController {
     }
 
     //各种支付
+    @ApiOperation("跳转支付接口")
     @GetMapping("/payPage")
     public String payOrder(HttpServletRequest request, @RequestParam("orderNo") String orderNo, HttpSession httpSession, @RequestParam("payType") int payType, RedirectAttributes attributes) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -161,6 +170,7 @@ public class OrderController {
         return "error/error_5xx";
     }
 
+    @ApiOperation("微信支付成功确认死接口")
     @GetMapping("/paySuccess")
     @ResponseBody
     public Result paySuccess(@RequestParam("orderNo") String orderNo, @RequestParam("payType") int payType, HttpSession httpSession) {
@@ -178,6 +188,7 @@ public class OrderController {
     }
 
     //导出订单为Excel表格
+    @ApiOperation("导出我的订单表格")
     @GetMapping("/orders/putExcel")
     public void ordersExcel(HttpServletResponse response,HttpSession httpSession){
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);

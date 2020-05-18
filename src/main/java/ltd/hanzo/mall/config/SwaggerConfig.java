@@ -38,8 +38,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("半藏商城")
-                .description("半藏商城-SwaggerUI-API-接口文档")
+                .title("半藏商城--API接口--SwaggerUI文档")
+                .description("半藏商城--山城啤酒--知心朋友")
                 .version("1.0")
                 .build();
     }

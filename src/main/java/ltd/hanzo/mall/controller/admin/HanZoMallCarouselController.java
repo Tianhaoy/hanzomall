@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.entity.Carousel;
@@ -24,6 +26,7 @@ import java.util.Objects;
  * @link https://github.com/Tianhaoy/hanzomall
  * 轮播图管理
  */
+@Api(tags = "HanZoMallCarouselController", description = "轮播图配置")
 @Controller
 @RequestMapping("/admin")
 @Slf4j
@@ -34,6 +37,7 @@ public class HanZoMallCarouselController {
     @Resource
     UpdateRedisService updateRedisService;
 
+    @ApiOperation("轮播图配置路由")
     @GetMapping("/carousels")
     public String carouselPage(HttpServletRequest request) {
         request.setAttribute("path", "hanzo_mall_carousel");
@@ -43,6 +47,7 @@ public class HanZoMallCarouselController {
     /**
      * 列表
      */
+    @ApiOperation("轮播图列表")
     @RequestMapping(value = "/carousels/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -56,6 +61,7 @@ public class HanZoMallCarouselController {
     /**
      * 添加
      */
+    @ApiOperation("添加轮播图信息")
     @RequestMapping(value = "/carousels/save", method = RequestMethod.POST)
     @ResponseBody
     public Result save(@RequestBody Carousel carousel) {
@@ -81,6 +87,7 @@ public class HanZoMallCarouselController {
     /**
      * 修改
      */
+    @ApiOperation("修改轮播图信息")
     @RequestMapping(value = "/carousels/update", method = RequestMethod.POST)
     @ResponseBody
     public Result update(@RequestBody Carousel carousel) {
@@ -106,6 +113,7 @@ public class HanZoMallCarouselController {
     /**
      * 详情
      */
+    @ApiOperation("轮播图详细信息")
     @GetMapping("/carousels/info/{id}")
     @ResponseBody
     public Result info(@PathVariable("id") Integer id) {
@@ -119,6 +127,7 @@ public class HanZoMallCarouselController {
     /**
      * 删除
      */
+    @ApiOperation("删除轮播图信息")
     @RequestMapping(value = "/carousels/delete", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids) {

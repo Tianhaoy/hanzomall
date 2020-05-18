@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.admin;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.service.HanZoMallUserService;
 import ltd.hanzo.mall.util.PageQueryUtil;
@@ -20,6 +22,7 @@ import java.util.Map;
  * @link https://github.com/Tianhaoy/hanzomall
  * 会员管理
  */
+@Api(tags = "HanZoMallUserController", description = "会员管理")
 @Slf4j
 @Controller
 @RequestMapping("/admin")
@@ -28,6 +31,7 @@ public class HanZoMallUserController {
     @Resource
     private HanZoMallUserService hanZoMallUserService;
 
+    @ApiOperation("会员管理路由")
     @GetMapping("/users")
     public String usersPage(HttpServletRequest request) {
         request.setAttribute("path", "users");
@@ -37,6 +41,7 @@ public class HanZoMallUserController {
     /**
      * 列表
      */
+    @ApiOperation("用户信息列表")
     @RequestMapping(value = "/users/list", method = RequestMethod.GET)
     @ResponseBody
     public Result list(@RequestParam Map<String, Object> params) {
@@ -50,6 +55,7 @@ public class HanZoMallUserController {
     /**
      * 用户禁用与解除禁用(0-未锁定 1-已锁定)
      */
+    @ApiOperation("用户禁用与解除禁用")
     @RequestMapping(value = "/users/lock/{lockStatus}", method = RequestMethod.POST)
     @ResponseBody
     public Result delete(@RequestBody Integer[] ids, @PathVariable int lockStatus) {

@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.common;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.service.SmsService;
@@ -21,6 +23,7 @@ import javax.servlet.http.HttpSession;
  * @link https://github.com/Tianhaoy/hanzomall
  * @发送短信
  */
+@Api(tags = "SmsSendController", description = "短信发送管理")
 @Slf4j
 @RestController
 public class SmsSendController {
@@ -28,6 +31,7 @@ public class SmsSendController {
     @Resource
     private SmsService smsService;
 
+    @ApiOperation("发送短信验证码")
     @RequestMapping("/sendCodeSms/{phoneNumber}")
     public Result SmsSendKaptcha(@PathVariable("phoneNumber") String phoneNumber, HttpSession httpSession) {
         //先验证手机号是否符合规则

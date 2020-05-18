@@ -1,5 +1,7 @@
 package ltd.hanzo.mall.controller.common;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
  * @link https://github.com/Tianhaoy/hanzomall
  * @发送邮箱
  */
+@Api(tags = "MailSendController", description = "邮件发送管理")
 @Slf4j
 @RestController
 public class MailSendController {
@@ -27,6 +30,7 @@ public class MailSendController {
     @Resource
     private MailSendService mailSendService;
 
+    @ApiOperation("发送普通邮件")
     @RequestMapping("/sendCodeMail")
     public Result mailSendKaptcha(HttpSession httpSession) {
         //生成6位随机码
@@ -45,6 +49,7 @@ public class MailSendController {
         return ResultGenerator.genSuccessResult();
     }
 
+    @ApiOperation("发送Html邮件")
     @RequestMapping("/sendHtmlMail")
     public String SendHtmlMail() {
         String content = "<html><body><h3>hello world ! --->Html邮件</h3></body></html>";
@@ -52,6 +57,7 @@ public class MailSendController {
         return "success";
     }
 
+    @ApiOperation("发送附件邮件")
     @RequestMapping("/sendAttachmentsMail")
     public String sendAttachmentsMail() {
         String filePath = "";//文件的路径
