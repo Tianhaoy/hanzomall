@@ -1,6 +1,6 @@
 package ltd.hanzo.mall.config;
 
-import ltd.hanzo.mall.QuartzTask.CallPayQuartzTask;
+import ltd.hanzo.mall.task.CallPayQuartzTask;
 import org.quartz.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
