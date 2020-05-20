@@ -8,6 +8,7 @@ import ltd.hanzo.mall.common.ServiceResultEnum;
 import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
 import ltd.hanzo.mall.entity.MallUser;
 import ltd.hanzo.mall.service.HanZoMallUserService;
+import ltd.hanzo.mall.service.RedisService;
 import ltd.hanzo.mall.util.MD5Util;
 import ltd.hanzo.mall.util.Result;
 import ltd.hanzo.mall.util.ResultGenerator;
@@ -25,6 +26,8 @@ public class PersonalController {
 
     @Resource
     private HanZoMallUserService hanZoMallUserService;
+    @Resource
+    private RedisService redisService;
 
     @ApiOperation("个人信息路由")
     @GetMapping("/personal")
@@ -37,8 +40,19 @@ public class PersonalController {
     @ApiOperation("退出登录")
     @GetMapping("/logout")
     public String logout(HttpSession httpSession) {
+        HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+        if (user!=null){
+            String key = "online:list";
+            boolean exists =redisService.hHasKey(key,user.getUserId().toString());
+            log.info("退出登录同时判断redis中是否含有这个userId的hashKey");
+            if (exists){
+                log.info("redis中存在当前用户的hashKey,删除这个hashKey");
+                //如果在hash中存在这个属性 删除这个属性
+                redisService.hDel(key,user.getUserId().toString());
+            }
+        }
         httpSession.removeAttribute(Constants.MALL_USER_SESSION_KEY);
-        return "mall/oss-login";
+        return "redirect:/oss-login";
     }
 
     @ApiOperation("账号登录路由")
@@ -82,6 +96,19 @@ public class PersonalController {
         String loginResult = hanZoMallUserService.login(loginName, MD5Util.MD5Encode(password, "UTF-8"), httpSession);
         //登录成功
         if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
+            HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+            String key = "online:list";
+            boolean exists =redisService.hHasKey(key,user.getUserId().toString());
+            log.info("从redis中判断当前用户的userId为hashKey是否存在");
+            if (exists){
+                //如果在hash中存在这个属性 先删除 在更新
+                log.info("redis存在当前用户的userId为hashKey");
+                redisService.hDel(key,user.getUserId());
+                redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+            }else {
+                log.info("redis不存在当前用户的userId为hashKey，更新redis中的hashKey");
+                redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+            }
             return ResultGenerator.genSuccessResult();
         }
         //登录失败
@@ -115,6 +142,19 @@ public class PersonalController {
                 String loginResult = hanZoMallUserService.login(loginName, MD5Util.MD5Encode(password, "UTF-8"), httpSession);
                 //登录成功
                 if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
+                    HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+                    String key = "online:list";
+                    boolean exists =redisService.hHasKey(key,user.getUserId().toString());
+                    log.info("从redis中判断当前用户的userId为hashKey是否存在");
+                    if (exists){
+                        //如果在hash中存在这个属性 先删除 在更新
+                        log.info("redis存在当前用户的userId为hashKey");
+                        redisService.hDel(key,user.getUserId());
+                        redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                    }else {
+                        log.info("redis不存在当前用户的userId为hashKey，更新redis中的hashKey");
+                        redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                    }
                     return ResultGenerator.genSuccessResult("登录成功。检测到此手机号是第一次登录，系统将您自动创建账号，默认密码为",password);
                 } else {
                     //登录失败
@@ -130,6 +170,19 @@ public class PersonalController {
             String loginResult = hanZoMallUserService.loginByLoginName(loginName, httpSession);
             //登录成功
             if (ServiceResultEnum.SUCCESS.getResult().equals(loginResult)) {
+                HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
+                String key = "online:list";
+                boolean exists =redisService.hHasKey(key,user.getUserId().toString());
+                log.info("从redis中判断当前用户的userId为hashKey是否存在");
+                if (exists){
+                    //如果在hash中存在这个属性 先删除 在更新
+                    log.info("redis存在当前用户的userId为hashKey");
+                    redisService.hDel(key,user.getUserId());
+                    redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                }else {
+                    log.info("redis不存在当前用户的userId为hashKey，更新redis中的hashKey");
+                    redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                }
                 return ResultGenerator.genSuccessResult();
             } else {
                 //登录失败

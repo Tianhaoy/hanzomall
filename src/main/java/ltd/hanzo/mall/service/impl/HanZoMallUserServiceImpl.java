@@ -63,7 +63,6 @@ public class HanZoMallUserServiceImpl implements HanZoMallUserService {
             }
             HanZoMallUserVO hanZoMallUserVO = new HanZoMallUserVO();
             BeanUtil.copyProperties(user, hanZoMallUserVO);
-            //设置购物车中的数量
             httpSession.setAttribute(Constants.MALL_USER_SESSION_KEY, hanZoMallUserVO);
             return ServiceResultEnum.SUCCESS.getResult();
         }

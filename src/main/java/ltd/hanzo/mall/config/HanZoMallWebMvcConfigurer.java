@@ -5,6 +5,7 @@ import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.interceptor.AdminLoginInterceptor;
 import ltd.hanzo.mall.interceptor.HanZoMallCartNumberInterceptor;
 import ltd.hanzo.mall.interceptor.HanZoMallLoginInterceptor;
+import ltd.hanzo.mall.interceptor.HanZoMallMonitorOnlineInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,6 +22,8 @@ public class HanZoMallWebMvcConfigurer implements WebMvcConfigurer {
     private HanZoMallLoginInterceptor hanZoMallLoginInterceptor;
     @Autowired
     private HanZoMallCartNumberInterceptor hanZoMallCartNumberInterceptor;
+    @Autowired
+    private HanZoMallMonitorOnlineInterceptor hanZoMallMonitorOnlineInterceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加一个拦截器，拦截以/admin为前缀的url路径（后台登陆拦截）
@@ -34,12 +37,14 @@ public class HanZoMallWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/admin/**")
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/login")
+                .excludePathPatterns("/oss-login")
                 .excludePathPatterns("/logout");
         // 商城页面登陆拦截
         registry.addInterceptor(hanZoMallLoginInterceptor)
                 .excludePathPatterns("/admin/**")
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/login")
+                .excludePathPatterns("/oss-login")
                 .excludePathPatterns("/logout")
                 .addPathPatterns("/goods/detail/**")
                 .addPathPatterns("/shop-cart")
@@ -50,7 +55,27 @@ public class HanZoMallWebMvcConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/personal")
                 .addPathPatterns("/personal/updateInfo")
                 .addPathPatterns("/selectPayType")
-                .addPathPatterns("/payPage");
+                .addPathPatterns("/payPage")
+                .addPathPatterns("/bill");
+        //用户进行的操作统计在线人数处理
+        registry.addInterceptor(hanZoMallMonitorOnlineInterceptor)
+                .excludePathPatterns("/admin/**")
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/oss-login")
+                .excludePathPatterns("/logout")
+                .addPathPatterns("/goods/detail/**")
+                .addPathPatterns("/shop-cart")
+                .addPathPatterns("/shop-cart/**")
+                .addPathPatterns("/saveOrder")
+                .addPathPatterns("/orders")
+                .addPathPatterns("/orders/**")
+                .addPathPatterns("/personal")
+                .addPathPatterns("/personal/updateInfo")
+                .addPathPatterns("/selectPayType")
+                .addPathPatterns("/payPage")
+                .addPathPatterns("/search")
+                .addPathPatterns("/bill");
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
