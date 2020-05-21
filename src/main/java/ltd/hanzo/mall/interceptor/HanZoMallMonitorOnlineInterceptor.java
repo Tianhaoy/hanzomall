@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 /**
  * @Author 皓宇QAQ
@@ -31,8 +32,12 @@ public class HanZoMallMonitorOnlineInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         log.debug("进入监听在线情况拦截器");
         if (null != request.getSession() && null == request.getSession().getAttribute(Constants.MALL_USER_SESSION_KEY)) {
-
-            return false;
+            log.debug("session为null，给上一层返回true，不影响其他业务");
+            String key = "online:list";
+            Map<Object, Object> map = redisService.hGetAll(key);
+            String onlineNumber = map.size()+"";
+            request.setAttribute("onlineNumber", onlineNumber);
+            return true;
         } else {
             HanZoMallUserVO user = (HanZoMallUserVO) request.getSession().getAttribute(Constants.MALL_USER_SESSION_KEY);
             String key = "online:list";
@@ -42,6 +47,9 @@ public class HanZoMallMonitorOnlineInterceptor implements HandlerInterceptor {
                 //如果在hash中存在这个属性 重新更新过期时间
                 log.info("监听在线情况拦截器重新更新当前用户的hashKey的过期时间");
                 redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                Map<Object, Object> map = redisService.hGetAll(key);
+                String onlineNumber = map.size()+"";
+                request.setAttribute("onlineNumber", onlineNumber);
             }
             return true;
         }

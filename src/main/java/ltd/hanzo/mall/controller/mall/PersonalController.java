@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
+
 @Api(tags = "PersonalController", description = "个人信息")
 @Slf4j
 @Controller
@@ -39,7 +41,7 @@ public class PersonalController {
 
     @ApiOperation("退出登录")
     @GetMapping("/logout")
-    public String logout(HttpSession httpSession) {
+    public String logout(HttpSession httpSession, HttpServletRequest request) {
         HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
         if (user!=null){
             String key = "online:list";
@@ -49,6 +51,9 @@ public class PersonalController {
                 log.info("redis中存在当前用户的hashKey,删除这个hashKey");
                 //如果在hash中存在这个属性 删除这个属性
                 redisService.hDel(key,user.getUserId().toString());
+                Map<Object, Object> map = redisService.hGetAll(key);
+                String onlineNumber = map.size()+"";
+                request.setAttribute("onlineNumber", onlineNumber);
             }
         }
         httpSession.removeAttribute(Constants.MALL_USER_SESSION_KEY);
@@ -79,7 +84,7 @@ public class PersonalController {
     public Result login(@RequestParam("loginName") String loginName,
                         @RequestParam("verifyCode") String verifyCode,
                         @RequestParam("password") String password,
-                        HttpSession httpSession) {
+                        HttpSession httpSession,HttpServletRequest request) {
         if (StringUtils.isEmpty(loginName)) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_NULL.getResult());
         }
@@ -105,9 +110,15 @@ public class PersonalController {
                 log.info("redis存在当前用户的userId为hashKey");
                 redisService.hDel(key,user.getUserId());
                 redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                Map<Object, Object> map = redisService.hGetAll(key);
+                String onlineNumber = map.size()+"";
+                request.setAttribute("onlineNumber", onlineNumber);
             }else {
                 log.info("redis不存在当前用户的userId为hashKey，更新redis中的hashKey");
                 redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                Map<Object, Object> map = redisService.hGetAll(key);
+                String onlineNumber = map.size()+"";
+                request.setAttribute("onlineNumber", onlineNumber);
             }
             return ResultGenerator.genSuccessResult();
         }
@@ -120,7 +131,7 @@ public class PersonalController {
     @ResponseBody
     public Result ossLogin(@RequestParam("loginName") String loginName,
                            @RequestParam("kaptchaCode") String kaptchaCode,
-                        HttpSession httpSession) {
+                        HttpSession httpSession,HttpServletRequest request) {
         if (StringUtils.isEmpty(loginName)) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_NAME_NULL.getResult());
         }
@@ -151,9 +162,15 @@ public class PersonalController {
                         log.info("redis存在当前用户的userId为hashKey");
                         redisService.hDel(key,user.getUserId());
                         redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                        Map<Object, Object> map = redisService.hGetAll(key);
+                        String onlineNumber = map.size()+"";
+                        request.setAttribute("onlineNumber", onlineNumber);
                     }else {
                         log.info("redis不存在当前用户的userId为hashKey，更新redis中的hashKey");
                         redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                        Map<Object, Object> map = redisService.hGetAll(key);
+                        String onlineNumber = map.size()+"";
+                        request.setAttribute("onlineNumber", onlineNumber);
                     }
                     return ResultGenerator.genSuccessResult("登录成功。检测到此手机号是第一次登录，系统将您自动创建账号，默认密码为",password);
                 } else {
@@ -179,9 +196,15 @@ public class PersonalController {
                     log.info("redis存在当前用户的userId为hashKey");
                     redisService.hDel(key,user.getUserId());
                     redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                    Map<Object, Object> map = redisService.hGetAll(key);
+                    String onlineNumber = map.size()+"";
+                    request.setAttribute("onlineNumber", onlineNumber);
                 }else {
                     log.info("redis不存在当前用户的userId为hashKey，更新redis中的hashKey");
                     redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
+                    Map<Object, Object> map = redisService.hGetAll(key);
+                    String onlineNumber = map.size()+"";
+                    request.setAttribute("onlineNumber", onlineNumber);
                 }
                 return ResultGenerator.genSuccessResult();
             } else {
