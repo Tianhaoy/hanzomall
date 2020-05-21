@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.util.Result;
 import ltd.hanzo.mall.util.ResultGenerator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,9 @@ import java.util.Random;
 @RequestMapping("/admin")
 public class UploadController {
 
+    @Value("${constants.file_url.FILE_UPLOAD_DIC}")
+    private String FILE_UPLOAD_DIC ;
+
     @ApiOperation("图片上传oss")
     @PostMapping({"/upload/file"})
     @ResponseBody
@@ -55,16 +59,16 @@ public class UploadController {
             resultSuccess.setData(addressData);
             log.debug("图片访问Url："+resultSuccess.getData().toString());
             //双保险 将图片保存在oss的同时也在服务器中保存照片 但是数据库中的链接是oss的
-            File fileDirectory = new File(Constants.FILE_UPLOAD_DIC);
+            File fileDirectory = new File(FILE_UPLOAD_DIC);
             //创建文件
-            File destFile = new File(Constants.FILE_UPLOAD_DIC + newFileName);
+            File destFile = new File(FILE_UPLOAD_DIC + newFileName);
             if (!fileDirectory.exists()) {
                 if (!fileDirectory.mkdir()) {
                     throw new IOException("文件夹创建失败,路径为：" + fileDirectory);
                 }
             }
             file.transferTo(destFile);
-            log.debug("在服务器路径 "+Constants.FILE_UPLOAD_DIC+"同步保存图片--");
+            log.debug("在服务器路径 "+FILE_UPLOAD_DIC+"同步保存图片--");
             //服务器中保存照片结束
             return resultSuccess;
         } catch (Exception e) {

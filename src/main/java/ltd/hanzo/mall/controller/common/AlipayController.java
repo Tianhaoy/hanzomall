@@ -14,6 +14,7 @@ import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
 import ltd.hanzo.mall.entity.HanZoMallOrder;
 import ltd.hanzo.mall.service.HanZoMallOrderService;
 import ltd.hanzo.mall.service.MailSendService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,6 +46,10 @@ public class AlipayController {
     private HanZoMallOrderService hanZoMallOrderService;
     @Resource
     private MailSendService mailSendService;
+    @Value("${constants.http_url.RETURN_URL}")
+    private String RETURN_URL;//异步
+    @Value("${constants.http_url.NOTIFY_URL}")
+    private String NOTIFY_URL;//同步
 
     //前往支付宝沙箱网关进行支付
     @ApiOperation("支付宝支付")
@@ -57,8 +62,8 @@ public class AlipayController {
         AlipayClient alipayClient = new DefaultAlipayClient(Constants.GATEWAY_URL, Constants.APP_ID, Constants.APP_PRIVATE_KEY, Constants.FORMAT, Constants.CHARSET, Constants.ALIPAY_PUBLIC_KEY, Constants.SIGN_TYPE);
         //设置请求参数
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-        alipayRequest.setReturnUrl(Constants.RETURN_URL);//同步
-        alipayRequest.setNotifyUrl(Constants.NOTIFY_URL);//异步
+        alipayRequest.setReturnUrl(RETURN_URL);//同步
+        alipayRequest.setNotifyUrl(NOTIFY_URL);//异步
 
         String out_trade_no = orderNo; //订单号
         String total_amount = totalPrice;//付款金额，必填
