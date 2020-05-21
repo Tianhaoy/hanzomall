@@ -28,6 +28,4 @@ public class CallPaySpringTask {
         log.info("通过SpringTask开始批量发送待支付订单邮件提醒");
         taskService.callPayOrders();
     }
-
-
 }
