@@ -45,13 +45,11 @@ public class IndexController {
         List<HanZoMallIndexConfigGoodsVO> hotGoodses = hanZoMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_HOT.getType(), Constants.INDEX_GOODS_HOT_NUMBER);
         List<HanZoMallIndexConfigGoodsVO> newGoodses = hanZoMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_NEW.getType(), Constants.INDEX_GOODS_NEW_NUMBER);
         List<HanZoMallIndexConfigGoodsVO> recommendGoodses = hanZoMallIndexConfigService.getConfigGoodsesForIndex(IndexConfigTypeEnum.INDEX_GOODS_RECOMMOND.getType(), Constants.INDEX_GOODS_RECOMMOND_NUMBER);
-        String onlineNumber = monitorOnlineService.getMonitorOnlineNumber();
         request.setAttribute("categories", categories);//分类数据
         request.setAttribute("carousels", carousels);//轮播图
         request.setAttribute("hotGoodses", hotGoodses);//热销商品
         request.setAttribute("newGoodses", newGoodses);//新品
         request.setAttribute("recommendGoodses", recommendGoodses);//推荐商品
-        request.setAttribute("onlineNumber", onlineNumber);//在线人数
         return "mall/index";
     }
 }

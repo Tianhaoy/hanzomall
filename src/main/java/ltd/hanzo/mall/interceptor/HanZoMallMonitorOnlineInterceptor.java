@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.Constants;
 import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
 import ltd.hanzo.mall.service.RedisService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,32 +28,24 @@ public class HanZoMallMonitorOnlineInterceptor implements HandlerInterceptor {
 
     @Resource
     private RedisService redisService;
+    @Value("${constants.online_list.key}")
+    private String key;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
         log.debug("进入监听在线情况拦截器");
-        if (null != request.getSession() && null == request.getSession().getAttribute(Constants.MALL_USER_SESSION_KEY)) {
-            log.debug("session为null，给上一层返回true，不影响其他业务");
-            String key = "online:list";
-            Map<Object, Object> map = redisService.hGetAll(key);
-            String onlineNumber = map.size()+"";
-            request.setAttribute("onlineNumber", onlineNumber);
-            return true;
-        } else {
+        if (null != request.getSession() && null != request.getSession().getAttribute(Constants.MALL_USER_SESSION_KEY)) {
             HanZoMallUserVO user = (HanZoMallUserVO) request.getSession().getAttribute(Constants.MALL_USER_SESSION_KEY);
-            String key = "online:list";
-            boolean exists =redisService.hHasKey(key,user.getUserId().toString());
-            log.info("从redis中判断当前用户的userId为hashKey是否存在");
-            if (exists){
-                //如果在hash中存在这个属性 重新更新过期时间
-                log.info("监听在线情况拦截器重新更新当前用户的hashKey的过期时间");
-                redisService.hSet(key,user.getUserId().toString(),user.getLoginName(),1800);
-                Map<Object, Object> map = redisService.hGetAll(key);
-                String onlineNumber = map.size()+"";
-                request.setAttribute("onlineNumber", onlineNumber);
-            }
-            return true;
+            //当user不等于空的时候 不管在redis中是否能查看这个hashKey都重新更新过期时间
+            //重新更新当前用户的hashKey的过期时间
+            redisService.hSet(key, user.getUserId().toString(), user.getLoginName(), 1800);
+        } else {
+            //session中的user为null，给上一层返回true，不影响其他业务
         }
+        Map<Object, Object> map = redisService.hGetAll(key);
+        String onlineNumber = map.size()+"";
+        request.setAttribute("onlineNumber", onlineNumber);
+        return true;
     }
 
     @Override
