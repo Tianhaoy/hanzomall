@@ -34,12 +34,12 @@
 <div class="login-box">
     <div class="login-logo" style="color: #1baeae;">
         <img th:src="@{/mall/image/new-bee-logo-3.png}" style="    height: 58px;float: left;margin-left: 10px;">
-        <h1>管理系统登陆</h1>
+        <h1>后台管理系统</h1>
     </div>
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg"> 半藏 商城 , Let's Go !</p>
+            <p class="login-box-msg"> 半藏 商城 , 山城啤酒-知心朋友 !</p>
             <form th:action="@{/admin/login}" method="post">
                 <div th:if="${not #strings.isEmpty(session.errorMsg)}" class="form-group">
                     <div class="alert alert-danger" th:text="${session.errorMsg}"></div>
@@ -67,15 +67,48 @@
                 <div class="row">
                     <div class="col-8">
                     </div>
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">登录
-                        </button>
+                    <div class="col-6">
+                        <button type="button" onclick="openNumberInfoModal()" class="btn btn-primary btn-block btn-flat">获取体验账号</button>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">登录</button>
                     </div>
                 </div>
             </form>
 
         </div>
         <!-- /.login-card-body -->
+
+        <div class="content">
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="numberInfoModal" tabindex="-1" role="dialog"
+                 aria-labelledby="numberInfoModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h6 class="modal-title" id="numberInfoModalLabel">获取体验账号</h6>
+                        </div>
+                        <div class="modal-body">
+                            <div class="el-dialog__body">
+                                <div data-v-c0dcf7e2="" style="text-align: center;">
+                                    <span data-v-c0dcf7e2="" class="font-title-large">
+                                        <span data-v-c0dcf7e2="" class="color-main font-extra-large">关注公众号</span>回复
+                                        <span data-v-c0dcf7e2="" class="color-main font-extra-large">"体验"</span>获取体验账号</span>
+                                        <br data-v-c0dcf7e2="">
+                                        <img data-v-c0dcf7e2="" src="http://hanzoimage.babehome.com/images/wx_code.jpg" width="160" height="160" style="margin-top: 10px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">确认</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal -->
+        </div>
     </div>
 </div>
 <!-- /.login-box -->
@@ -86,5 +119,6 @@
 <script th:src="@{/admin/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 <script th:src="@{/admin/dist/js/plugins/particles.js}"></script>
 <script th:src="@{/admin/dist/js/plugins/login-bg-particles.js}"></script>
+<script th:src="@{/admin/dist/js/mall_admin_login.js}"></script>
 </body>
 </html>
