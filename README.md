@@ -19,6 +19,7 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 - `Spring Boot 整合 kaptcha 验证码 `
 - `Spring Boot 整合 logback 打印日志`
 - `Spring Boot 整合 swagger-ui 接口文档`
+- `nginx反向代理域名解析配置多个服务共用80端口`
 - `HTML5 搭载 JqGrid 分页插件`
 - `KindEditor 富文本编译器`
 
@@ -40,12 +41,12 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 
 `项目演示`
 
-- [商城首页](http://mall.babehome.com:28089/index)
-- [商城后台管理系统](http://mall.babehome.com:28089/admin)
+- [商城首页](http://mall.babehome.com/index)
+- [商城后台管理系统](http://mall.babehome.com/admin)
 
 `开发及部署`
 
-- 部署在阿里云服务器
+- 阿里云服务器+nginx反向代理
 - 域名备案以及域名解析
 
 > 问题或者建议都可以在`issues`中反馈给我，依旧在继续开发完善新功能。
@@ -53,7 +54,7 @@ hanzo-mall 项目（半藏商城）是一套Maven的电商系统，包括 商城
 - 我的邮箱：`2469653218@qq.com`
 
 - [GitHub](https://github.com/Tianhaoy/hanzomall)
-- [个人博客](http://blog.babehome.com:8090/)
+- [个人博客](http://blog.babehome.com)
 
 `半藏的名字解释`
 
