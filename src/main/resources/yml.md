@@ -1,0 +1,5 @@
+- application.yml 是控制local,dev,prod三个环境的总yml
+- 启动的时候只需要调整yml中的active为local,dev,prod就可以切换连接三个环境
+- local.yml 环境是本地环境，配置的都是本机数据库以及redis或者mq等。
+- dev.yml环境为测试环境，配置连接的是测试环境的数据库等。
+- prod.yml环境为正式环境，配置连接的是正式环境的数据库等。
