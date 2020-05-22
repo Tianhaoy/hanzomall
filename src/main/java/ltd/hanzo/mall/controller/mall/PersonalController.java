@@ -1,5 +1,6 @@
 package ltd.hanzo.mall.controller.mall;
 
+import cn.hutool.extra.servlet.ServletUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,7 @@ public class PersonalController {
         String onlineNumber = monitorOnlineService.logoutDelMonitorOnlineNumber(user);
         request.setAttribute("onlineNumber", onlineNumber);
         httpSession.removeAttribute(Constants.MALL_USER_SESSION_KEY);
+        httpSession.removeAttribute("ipAddress");
         return "redirect:/oss-login";
     }
 
@@ -96,6 +98,9 @@ public class PersonalController {
             HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
             String onlineNumber = monitorOnlineService.loginSetMonitorOnlineNumber(user);
             request.setAttribute("onlineNumber", onlineNumber);
+            String ipAddress = ServletUtil.getClientIP(request);
+            log.info(ipAddress);
+            httpSession.setAttribute("ipAddress",ipAddress);
             return ResultGenerator.genSuccessResult();
         }
         //登录失败
@@ -132,6 +137,8 @@ public class PersonalController {
                     HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
                     String onlineNumber = monitorOnlineService.loginSetMonitorOnlineNumber(user);
                     request.setAttribute("onlineNumber", onlineNumber);
+                    String ip = ServletUtil.getClientIP(request);
+                    httpSession.setAttribute("ip",ip);
                     return ResultGenerator.genSuccessResult("登录成功。检测到此手机号是第一次登录，系统将您自动创建账号，默认密码为",password);
                 } else {
                     //登录失败
@@ -150,6 +157,8 @@ public class PersonalController {
                 HanZoMallUserVO user = (HanZoMallUserVO) httpSession.getAttribute(Constants.MALL_USER_SESSION_KEY);
                 String onlineNumber = monitorOnlineService.loginSetMonitorOnlineNumber(user);
                 request.setAttribute("onlineNumber", onlineNumber);
+                String ip = ServletUtil.getClientIP(request);
+                httpSession.setAttribute("ip",ip);
                 return ResultGenerator.genSuccessResult();
             } else {
                 //登录失败

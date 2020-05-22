@@ -2,10 +2,7 @@ package ltd.hanzo.mall.config;
 
 
 import ltd.hanzo.mall.common.Constants;
-import ltd.hanzo.mall.interceptor.AdminLoginInterceptor;
-import ltd.hanzo.mall.interceptor.HanZoMallCartNumberInterceptor;
-import ltd.hanzo.mall.interceptor.HanZoMallLoginInterceptor;
-import ltd.hanzo.mall.interceptor.HanZoMallMonitorOnlineInterceptor;
+import ltd.hanzo.mall.interceptor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -24,6 +21,8 @@ public class HanZoMallWebMvcConfigurer implements WebMvcConfigurer {
     private HanZoMallCartNumberInterceptor hanZoMallCartNumberInterceptor;
     @Autowired
     private HanZoMallMonitorOnlineInterceptor hanZoMallMonitorOnlineInterceptor;
+    @Autowired
+    private HanZoMallVisitNumberInterceptor hanZoMallVisitNumberInterceptor;
 
     public void addInterceptors(InterceptorRegistry registry) {
         // 添加一个拦截器，拦截以/admin为前缀的url路径（后台登陆拦截）
@@ -59,6 +58,13 @@ public class HanZoMallWebMvcConfigurer implements WebMvcConfigurer {
                 .addPathPatterns("/bill");
         //用户进行的操作统计在线人数处理
         registry.addInterceptor(hanZoMallMonitorOnlineInterceptor)
+                .excludePathPatterns("/admin/**")
+                .excludePathPatterns("/register")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/oss-login")
+                .excludePathPatterns("/logout");
+        //访问次数统计
+        registry.addInterceptor(hanZoMallVisitNumberInterceptor)
                 .excludePathPatterns("/admin/**")
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/login")
