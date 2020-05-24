@@ -14,6 +14,7 @@ import ltd.hanzo.mall.service.RedisService;
 import ltd.hanzo.mall.util.MD5Util;
 import ltd.hanzo.mall.util.Result;
 import ltd.hanzo.mall.util.ResultGenerator;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,8 @@ public class PersonalController {
     private RedisService redisService;
     @Resource
     private MonitorOnlineService monitorOnlineService;
+    @Value("${constants.randomCode.key}")
+    private String key;
 
     @ApiOperation("个人信息路由")
     @GetMapping("/personal")
@@ -119,10 +122,17 @@ public class PersonalController {
         if (StringUtils.isEmpty(kaptchaCode)) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_NULL.getResult());
         }
-        String randomCode = httpSession.getAttribute(Constants.RANDOM_CODE) + "";
-        if (StringUtils.isEmpty(randomCode) || !kaptchaCode.equalsIgnoreCase(randomCode)) {
+        //String randomCode = httpSession.getAttribute(Constants.RANDOM_CODE) + "";
+        boolean exits = redisService.hasKey(key+loginName+kaptchaCode);
+        if (exits){
+            String randomCode = redisService.get(key+loginName+kaptchaCode).toString();
+            if (StringUtils.isEmpty(randomCode) || !kaptchaCode.equalsIgnoreCase(randomCode)) {
+                return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
+            }
+        }else {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
         }
+
         //先验证用户是否注册过
         if (hanZoMallUserService.getByLoginName(loginName) == null) {
             //用户没有注册过 先自动帮用户注册账号 再登录

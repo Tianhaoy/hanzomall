@@ -69,10 +69,10 @@
                 <a href="http://blog.babehome.com:8090">个人博客</a>
                 <a href="https://github.com/Tianhaoy/hanzomall/issues">问题反馈</a>
                 <a href="https://github.com/Tianhaoy/hanzomall">GitHub 地址</a>
-                <a th:text="'当前在线人数  '+${onlineNumber}+' 人'"></a>
-                <a th:text="'网站访问次数  '+${visitNumber}+' 次'"></a>
+                <a th:text="'当前在线人数：'+${onlineNumber}"></a>
+                <a th:text="'网站访问次数：'+${visitNumber}"></a>
                 <th:block th:if="${session.ipAddress!=null}">
-                    <a th:text="'当前登录IP  '+${session.ipAddress}"></a>
+                    <a th:text="'当前登录IP：'+${session.ipAddress}" style="color:#4cae4c "></a>
                 </th:block>
             </div>
         </div>
