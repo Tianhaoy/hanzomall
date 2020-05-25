@@ -9,6 +9,7 @@
 
 - `Spring Boot 整合 MyBatis 操作数据库`
 - `Spring Boot 整合 Redis缓存主页信息以及统计在线人数`
+- `Spring Boot 整合 RabbitMq作为消息中间件`
 - `Spring Boot 整合 Quartz定时扫描订单发送提醒邮件`
 - `Spring Boot 整合 Thymeleaf 模板引擎`
 - `Spring Boot 整合 支付宝沙箱支付接口 `
