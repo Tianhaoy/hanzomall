@@ -158,7 +158,7 @@
     }
     $('#sendCodeMail').click(function () {
         var emailAddress = $("#emailAddress").val();
-        $.get("/sendCodeMail" , function (r) {
+        $.get("/sendCodeMail/" + emailAddress, function (r) {
             if (r.resultCode == 200 ) {
                 console.log(r.resultCode);
                 console.log("验证码发送成功")

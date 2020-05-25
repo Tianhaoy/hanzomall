@@ -1,5 +1,6 @@
 package ltd.hanzo.mall.common;
 
+import com.rabbitmq.client.AMQP;
 import lombok.Getter;
 
 /**
@@ -14,7 +15,13 @@ public enum  QueueEnum {
     /**
      * 发送短信消息通知队列
      */
-    QUEUE_SMS_SEND("mall.sms.direct", "mall.sms.send", "mall.sms.send");
+    QUEUE_SMS_SEND("mall.sms.direct", "mall.sms.send", "mall.sms.send"),
+
+    /**
+     * 发送邮件消息通知队列
+     */
+    QUEUE_EMAIL_SEND("mall.email.direct", "mall.email.send", "mall.email.send");
+
 
     /**
      * 交换机名称

@@ -1,7 +1,9 @@
 package ltd.hanzo.mall.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.HanZoMallOrderStatusEnum;
+import ltd.hanzo.mall.component.SendEmailSender;
 import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
 import ltd.hanzo.mall.entity.HanZoMallOrder;
 import ltd.hanzo.mall.service.HanZoMallOrderService;
@@ -33,6 +35,8 @@ public class TaskServiceImpl implements TaskService {
     private HanZoMallUserService hanZoMallUserService;
     @Resource
     private MailSendService mailSendService;
+    @Resource
+    private SendEmailSender sendEmailSender;
 
     @Override
     public void callPayOrders() {
@@ -52,7 +56,11 @@ public class TaskServiceImpl implements TaskService {
                     //用户邮箱不为空 拼接主题、内容给用户发送邮件
                     String subject = "【半藏商城未支付订单提醒】";
                     String content = "您好，你在" + date + "创建的订单号为" + orderNo + "的订单还尚未支付，待支付金额为" + totalPrice + "元,请尽快支付。";
-                    mailSendService.sendSimpleMail(hanZoMallUserVO.getEmailAddress(), subject, content);
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("to",hanZoMallUserVO.getEmailAddress());
+                    jsonObject.put("subject",subject);
+                    jsonObject.put("content",content);
+                    sendEmailSender.sendMessage(jsonObject);
                 } else if (hanZoMallUserVO != null && hanZoMallUserVO.getLoginName() != null) {
                     //用户邮箱为空 可以给用户发送手机号
                     log.info("用户邮箱为空，可以给用户发送短信提醒");
