@@ -31,15 +31,15 @@
 
 `Linux部署工具`
 
-- SecureCRT+Fz+FlashFXP
+- xShell+Fz
 
 `数据和缓存图形化工具`
 
-- Navicat+RedisDesktopManager
+- Navicat for MySQL + RedisDesktopManager
 
 `接口测试工具`
 
-- Postman
+- Postman + Chrome
 
 `项目演示`
 
@@ -48,7 +48,7 @@
 
 `开发及部署`
 
-- 阿里云服务器+nginx反向代理
+- 阿里云服务器+Nginx反向代理
 - 域名备案以及域名解析
 
 > 问题或者建议都可以在`issues`中反馈给我，依旧在继续开发完善新功能。
@@ -57,10 +57,6 @@
 
 - [GitHub](https://github.com/Tianhaoy/hanzomall)
 - [个人博客](http://blog.babehome.com)
-
-`半藏的名字解释`
-
-~~我从2017年开始喜欢一个网红叫`半藏森林`，后来她做小三了，我太难过了(*^__^*)，所以就叫`半藏商城`~~
 
 
 
