@@ -53,9 +53,10 @@
 
 > 问题或者建议都可以在`issues`中反馈给我，依旧在继续开发完善新功能。
 
+`联系方式`
+
 - 我的邮箱：`2469653218@qq.com`
 
-- [GitHub](https://github.com/Tianhaoy/hanzomall)
 - [个人博客](http://blog.babehome.com)
 
 
