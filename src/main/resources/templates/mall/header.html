@@ -34,10 +34,12 @@
     <div class="center">
         <ul class="fl">
             <li><a th:href="@{/index}">半藏商城</a></li>
-            <li><a th:href="@{/admin}">后台管理系统</a></li>
-            <li><a href="http://blog.babehome.com">个人博客</a> <li>
-            <li><a href="https://github.com/Tianhaoy/hanzomall/issues">问题反馈</a></li>
-            <li><a href="https://github.com/Tianhaoy/hanzomall">GitHub 地址</a></li>
+            <li><a th:href="@{/admin}" target="_blank">后台管理系统</a></li>
+            <li><a th:href="@{/swagger-ui.html}" target="_blank">Swagger UI 接口文档</a></li>
+            <li><a href="http://blog.babehome.com" target="_blank">个人博客</a> <li>
+            <li><a href="https://github.com/Tianhaoy/hanzomall/issues" target="_blank">问题反馈</a></li>
+            <li><a href="https://github.com/Tianhaoy/hanzomall" target="_blank">GitHub 地址</a></li>
+
         </ul>
         <div class="fr">
             <th:block th:unless="${session.hanZoMallUser==null}">

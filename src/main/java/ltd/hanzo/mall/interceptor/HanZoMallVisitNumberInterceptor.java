@@ -39,10 +39,10 @@ public class HanZoMallVisitNumberInterceptor implements HandlerInterceptor {
         if (exists){
             //这个key不为空 访问了index ++1
             if (uri.startsWith("/index") || uri.startsWith("/") || uri.startsWith("/index.html")) {
-                log.info("访问了主页，访问量+1");
+                //log.info("访问了主页，访问量+1");
                 Map<Object, Object> map = redisService.hGetAll(key);
                 int visitNumber = (int) map.get(hashKey);
-                log.info("之前"+visitNumber+"");
+                //log.info("之前"+visitNumber+"");
                 redisService.hSet(key, hashKey, visitNumber+1);
             }else{
                 //这个key不为空 没访问主页 不set
@@ -50,7 +50,7 @@ public class HanZoMallVisitNumberInterceptor implements HandlerInterceptor {
         }else {
             //如果为空并且还访问了index 直接set一个1
             if (uri.startsWith("/index") || uri.startsWith("/") || uri.startsWith("/index.html")) {
-                log.info("访问了主页，访问量+1");
+                //log.info("访问了主页，访问量+1");
                 redisService.hSet(key,hashKey,1);
             }else{
                 //如果为空但是访问的不是index set一个0
@@ -60,7 +60,7 @@ public class HanZoMallVisitNumberInterceptor implements HandlerInterceptor {
         Map<Object, Object> map = redisService.hGetAll(key);
         int visitNumber = (int) map.get(hashKey);
         String visitNumberString = visitNumber+"";
-        log.info("之后"+visitNumberString);
+        //log.info("之后"+visitNumberString);
         request.setAttribute("visitNumber",visitNumberString);
         return true;
     }

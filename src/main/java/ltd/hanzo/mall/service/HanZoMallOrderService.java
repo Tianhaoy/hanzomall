@@ -8,6 +8,7 @@ import ltd.hanzo.mall.entity.HanZoMallOrder;
 import ltd.hanzo.mall.entity.MallUser;
 import ltd.hanzo.mall.util.PageQueryUtil;
 import ltd.hanzo.mall.util.PageResult;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -131,5 +132,12 @@ public interface HanZoMallOrderService {
      * @return
      */
     List<HanZoMallOrder> getHanZoMallOrderByOrderStatus(int orderStatus);
+
+    /**
+     * 取消单个超时订单
+     */
+    @Transactional
+    void cancelOrder(String orderNo);
+
 
 }

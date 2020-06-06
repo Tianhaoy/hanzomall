@@ -121,4 +121,5 @@ public class MailSendServiceImpl implements MailSendService {
             log.error("发送邮件时发生异常！", e);
         }
     }
+
 }

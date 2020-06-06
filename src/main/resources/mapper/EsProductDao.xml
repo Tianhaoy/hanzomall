@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="ltd.hanzo.mall.dao.EsProductDao">
+    <resultMap id="esProductListMap" type="ltd.hanzo.mall.entity.EsProduct">
+        <id column="goods_id" jdbcType="BIGINT" property="goodsId"/>
+        <result column="goods_name" jdbcType="VARCHAR" property="goodsName"/>
+        <result column="goods_intro" jdbcType="VARCHAR" property="goodsIntro"/>
+        <result column="goods_category_id" jdbcType="BIGINT" property="goodsCategoryId"/>
+        <result column="goods_cover_img" jdbcType="VARCHAR" property="goodsCoverImg"/>
+        <result column="goods_carousel" jdbcType="VARCHAR" property="goodsCarousel"/>
+        <result column="original_price" jdbcType="INTEGER" property="originalPrice"/>
+        <result column="selling_price" jdbcType="INTEGER" property="sellingPrice"/>
+        <result column="stock_num" jdbcType="INTEGER" property="stockNum"/>
+        <result column="tag" jdbcType="VARCHAR" property="tag"/>
+        <result column="goods_sell_status" jdbcType="TINYINT" property="goodsSellStatus"/>
+        <result column="create_user" jdbcType="INTEGER" property="createUser"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_user" jdbcType="INTEGER" property="updateUser"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    goods_id, goods_name, goods_intro,goods_category_id, goods_cover_img, goods_carousel, original_price,
+    selling_price, stock_num, tag, goods_sell_status, create_user, create_time, update_user,
+    update_time
+  </sql>
+    <select id="getAllEsProductList" resultMap="esProductListMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_newbee_mall_goods_info
+        where goods_sell_status = 0
+        <if test="goodsId!=null">
+            and goods_id=#{goodsId}
+        </if>
+    </select>
+
+</mapper>

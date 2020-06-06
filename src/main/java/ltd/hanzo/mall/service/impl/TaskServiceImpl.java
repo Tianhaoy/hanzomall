@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.HanZoMallOrderStatusEnum;
 import ltd.hanzo.mall.component.SendEmailSender;
 import ltd.hanzo.mall.controller.vo.HanZoMallUserVO;
+import ltd.hanzo.mall.dao.HanZoMallOrderMapper;
 import ltd.hanzo.mall.entity.HanZoMallOrder;
 import ltd.hanzo.mall.service.HanZoMallOrderService;
 import ltd.hanzo.mall.service.HanZoMallUserService;
@@ -37,6 +38,8 @@ public class TaskServiceImpl implements TaskService {
     private MailSendService mailSendService;
     @Resource
     private SendEmailSender sendEmailSender;
+    @Resource
+    private HanZoMallOrderMapper hanZoMallOrderMapper;
 
     @Override
     public void callPayOrders() {
@@ -70,5 +73,24 @@ public class TaskServiceImpl implements TaskService {
                 }
             }
         }
+    }
+
+    @Override
+    public void cancelOrderSendSimpleMail(String orderNo) {
+        HanZoMallOrder hanZoMallOrder = hanZoMallOrderMapper.selectByOrderNo(orderNo);
+        if (hanZoMallOrder != null) {
+            HanZoMallUserVO hanZoMallUserVO = hanZoMallUserService.getByPrimaryKey(hanZoMallOrder.getUserId());
+            if (hanZoMallUserVO != null && !StringUtils.isEmpty(hanZoMallUserVO.getEmailAddress())) {
+                //用户邮箱不为空 拼接主题、内容给用户发送邮件
+                String subject = "【半藏商城取消超时订单提醒】";
+                String content = "您好，你的订单号为" + orderNo + "的订单因超过60分钟未支付，已被系统取消订单。";
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("to", hanZoMallUserVO.getEmailAddress());
+                jsonObject.put("subject", subject);
+                jsonObject.put("content", content);
+                sendEmailSender.sendMessage(jsonObject);
+            }
+        }
+
     }
 }

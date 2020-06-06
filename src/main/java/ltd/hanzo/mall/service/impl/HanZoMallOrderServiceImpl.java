@@ -2,6 +2,7 @@ package ltd.hanzo.mall.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import ltd.hanzo.mall.common.*;
+import ltd.hanzo.mall.component.CancelOrderSender;
 import ltd.hanzo.mall.controller.vo.*;
 import ltd.hanzo.mall.dao.HanZoMallGoodsMapper;
 import ltd.hanzo.mall.dao.HanZoMallOrderItemMapper;
@@ -12,10 +13,8 @@ import ltd.hanzo.mall.entity.HanZoMallOrder;
 import ltd.hanzo.mall.entity.HanZoMallOrderItem;
 import ltd.hanzo.mall.entity.StockNumDTO;
 import ltd.hanzo.mall.service.HanZoMallOrderService;
-import ltd.hanzo.mall.util.BeanUtil;
-import ltd.hanzo.mall.util.NumberUtil;
-import ltd.hanzo.mall.util.PageQueryUtil;
-import ltd.hanzo.mall.util.PageResult;
+import ltd.hanzo.mall.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -40,6 +39,8 @@ public class HanZoMallOrderServiceImpl implements HanZoMallOrderService {
     private HanZoMallShoppingCartItemMapper hanZoMallShoppingCartItemMapper;
     @Resource
     private HanZoMallGoodsMapper hanZoMallGoodsMapper;
+    @Autowired
+    private CancelOrderSender cancelOrderSender;
 
     @Override
     public PageResult getHanZoMallOrdersPage(PageQueryUtil pageUtil) {
@@ -252,6 +253,8 @@ public class HanZoMallOrderServiceImpl implements HanZoMallOrderService {
                     }
                     //保存至数据库
                     if (hanZoMallOrderItemMapper.insertBatch(hanZoMallOrderItems) > 0) {
+                        //下单完成后开启一个延迟消息，用于当用户没有付款时取消订单（orderId应该在下单后生成）
+                        sendDelayMessageCancelOrder(orderNo);
                         //所有操作成功后，将订单号返回，以供Controller方法跳转到订单详情
                         return orderNo;
                     }
@@ -427,6 +430,23 @@ public class HanZoMallOrderServiceImpl implements HanZoMallOrderService {
             return orderListS;
         }
         return null;
+    }
+
+    @Override
+    public void cancelOrder(String orderNo) {
+        HanZoMallOrder hanZoMallOrder = hanZoMallOrderMapper.selectByOrderNo(orderNo);
+        if (hanZoMallOrder != null && hanZoMallOrder.getOrderStatus() == 0) {
+            //超时取消订单
+            hanZoMallOrderMapper.closeOrder(Collections.singletonList(hanZoMallOrder.getOrderId()), HanZoMallOrderStatusEnum.ORDER_CLOSED_BY_EXPIRED.getOrderStatus());
+
+        }
+    }
+
+    private void sendDelayMessageCancelOrder(String orderNo) {
+        //获取订单超时时间，假设为60分钟
+        long delayTimes = 36 * 100000;
+        //发送延迟消息
+        cancelOrderSender.sendMessage(orderNo, delayTimes);
     }
 
 

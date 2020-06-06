@@ -69,7 +69,10 @@ public class HanZoMallWebMvcConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/login")
                 .excludePathPatterns("/oss-login")
-                .excludePathPatterns("/logout");
+                .excludePathPatterns("/logout")
+                .excludePathPatterns("/swagger-ui.html")
+                .excludePathPatterns("/esProduct/**")
+                .excludePathPatterns("/search");
     }
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
