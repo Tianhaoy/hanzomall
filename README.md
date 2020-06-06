@@ -28,11 +28,11 @@
 
 `项目开发工具`
 
-- IDEA+Git
+- IDEA + Git
 
 `Linux部署工具`
 
-- xShell+Fz
+- xShell + Fz
 
 `数据和缓存图形化工具`
 
