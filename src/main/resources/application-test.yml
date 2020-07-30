@@ -1,0 +1,139 @@
+# author 皓宇QAQ
+# email 2469653218@qq.com
+# link https://github.com/Tianhaoy/hanzomall
+# 本地环境配置
+server:
+  port: 28089
+
+spring:
+  #关闭Thymeleaf缓存
+  thymeleaf:
+    cache: false
+  data:
+    elasticsearch:
+      repositories:
+        enabled: true
+      cluster-nodes: 127.0.0.1:9300 # es的连接地址及端口号
+      cluster-name: elasticsearch # es集群的名称
+
+  #本地数据库(测试)
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    name: hanzo-mall-datasource
+    url: jdbc:mysql://localhost:3306/newbee_mall_db?useUnicode=true&serverTimezone=Asia/Shanghai&characterEncoding=utf8&autoReconnect=true&useSSL=false&allowMultiQueries=true
+    username:
+    password:
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: hikariCP
+      max-lifetime: 30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+  #springboot集成发送邮件
+  ##邮箱服务器地址QQ smtp.qq.com sina smtp.sina.cn aliyun smtp.aliyun.com 163 smtp.163.com
+  mail:
+    host: smtp.qq.com
+    username: hanzo-mall@foxmail.com
+    #QQ邮箱应该使用授权码
+    password:
+    protocol: smtp
+    default-encoding: UTF-8
+    port: 465
+    #使用SMTPS协议465端口
+    # ssl 配置
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+            port: 465
+          starttls:
+            enable: true
+            required: true
+
+  #SpringBoot通过lettuce配置Redis
+  redis:
+    host: localhost # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password: # Redis服务器连接密码（默认为空）
+    lettuce:
+      pool:
+        max-active: 8 # 连接池最大连接数(使用负值表示没有限制) 默认为8
+        max-idle: 8 # 连接池中的最大空闲连接 默认为8
+        max-wait: -1ms # 连接池最大阻塞等待时间(使用负值表示没有限制) 默认为-1
+        min-idle: 0 # 连接池中的最小空闲连接 默认为 0
+      shutdown-timeout: 5000 # 连接超时时间（毫秒）
+
+  #SpringBoot配置RabbitMq
+  rabbitmq:
+    host: localhost # rabbitmq的连接地址
+    port: 5672 # rabbitmq的连接端口号
+    virtual-host: /hanzoMall # rabbitmq的虚拟host
+    username: hanzoMall # rabbitmq的用户名
+    password: hanzoMall # rabbitmq的密码
+    publisher-confirms: true #如果对异步消息需要回调必须设置为true
+
+
+# mybatis config
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+logging:
+  #日志保存路径
+  file: E:\Iworkspace\hanzo-mall\logs\hanZoMall.log
+  #日志 Debug级别输出
+  level:
+    ltd:
+      hanzo:
+        mall: debug
+  #格式化输出：%d:表示日期  %thread:表示线程名  %-5level:级别从左显示5个字符宽度  %msg:日志消息  %n:是换行符
+  #控制台日志 彩色输出调试更方便  日志记录到.log文件中
+  pattern:
+    console: '%red(%d{yyyy/MM/dd-HH:mm:ss}) %green([%thread]) %highlight(%-5level) %blue(%logger) %boldMagenta(-) %msg%n'
+    file: '%d{yyyy/MM/dd-HH:mm} [%thread] %-5level %logger - %msg%n'
+
+##发送邮件地址
+mail:
+  fromMail:
+    sender: hanzo-mall@foxmail.com
+
+#springboot集成短信
+sms:
+  #访问阿里云API的验证
+  accessKeyId:
+  accessKeySecret:
+  #阿里云云通信短信API产品
+  product: Dysmsapi
+  #产品域名
+  domain: dysmsapi.aliyuncs.com
+  #签名
+  signName: 半藏商城
+  #发送验证码模版CODE
+  templateCode:
+
+# 自定义常量
+constants:
+  file_url:
+    FILE_UPLOAD_DIC: E:\Iworkspace\hanzo-mall\upload\ #上传文件的默认url前缀
+  http_url:
+    NOTIFY_URL: http://mall.babehome.com:28089/alipay/alipayNotifyNotice #异步通知页面路径
+    RETURN_URL: http://localhost:28089/alipay/alipayReturnNotice #同步通知页面路径
+  online_list:
+    key: online:list #redis中判断在线人数的key
+  visit_hash:
+    key: visit:hash #redis中访问人数统计的key
+    hashKey: visit_number
+  randomCode:
+    key: randomCode:list #验证码随机的key头
+
+
+
+
